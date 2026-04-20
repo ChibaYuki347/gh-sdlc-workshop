@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(${editMode} ? '顧客編集' : '顧客登録')}"></head>
+<body>
+<nav th:replace="~{layout :: navbar}"></nav>
+
+<div class="container">
+    <h2 th:text="${editMode} ? '顧客編集' : '新規顧客登録'"></h2>
+    <hr/>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title" th:text="${editMode} ? '顧客情報を編集' : '顧客情報を入力してください'"></h3>
+        </div>
+        <div class="panel-body">
+            <form th:action="${editMode} ? @{/customers/{id}(id=${customer.id})} : @{/customers}"
+                  method="post" class="form-horizontal">
+
+                <!-- 基本情報 -->
+                <h4>基本情報</h4>
+                <hr/>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">姓 <span class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="text" name="lastName" class="form-control" th:value="${customer.lastName}"
+                               placeholder="山田" required="required"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">名 <span class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="text" name="firstName" class="form-control" th:value="${customer.firstName}"
+                               placeholder="太郎" required="required"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">メールアドレス <span class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <input type="email" name="email" class="form-control" th:value="${customer.email}"
+                               placeholder="yamada@example.com" required="required"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">電話番号</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="phone" class="form-control" th:value="${customer.phone}"
+                               placeholder="090-1234-5678"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">住所</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="address" class="form-control" th:value="${customer.address}"
+                               placeholder="東京都千代田区..."/>
+                    </div>
+                </div>
+
+                <!-- 契約情報 -->
+                <h4>契約情報</h4>
+                <hr/>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">契約番号</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="policyNumber" class="form-control"
+                               th:value="${customer.policyNumber}" placeholder="POL-XXXX"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">契約種別</label>
+                    <div class="col-sm-6">
+                        <select name="policyType" class="form-control">
+                            <option value="">-- 選択してください --</option>
+                            <option value="LIFE" th:selected="${customer.policyType == 'LIFE'}">生命保険</option>
+                            <option value="MEDICAL" th:selected="${customer.policyType == 'MEDICAL'}">医療保険</option>
+                            <option value="AUTO" th:selected="${customer.policyType == 'AUTO'}">自動車保険</option>
+                            <option value="FIRE" th:selected="${customer.policyType == 'FIRE'}">火災保険</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">ステータス</label>
+                    <div class="col-sm-6">
+                        <select name="policyStatus" class="form-control">
+                            <option value="0" th:selected="${customer.policyStatus == 0}">申請中</option>
+                            <option value="1" th:selected="${customer.policyStatus == 1}">有効</option>
+                            <option value="2" th:selected="${customer.policyStatus == 2}">失効</option>
+                            <option value="3" th:selected="${customer.policyStatus == 3}">解約</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">保険料（月額・円）</label>
+                    <div class="col-sm-6">
+                        <input type="number" name="premiumAmount" class="form-control"
+                               th:value="${customer.premiumAmount}" placeholder="5000" step="1"/>
+                    </div>
+                </div>
+
+                <!-- 担当者情報 -->
+                <h4>担当者情報</h4>
+                <hr/>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">担当者名</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="agentName" class="form-control" th:value="${customer.agentName}"
+                               placeholder="担当者名"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">担当者メール</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="agentEmail" class="form-control" th:value="${customer.agentEmail}"
+                               placeholder="agent@example.com"/>
+                    </div>
+                </div>
+
+                <!-- 送信ボタン -->
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-6">
+                        <button type="submit" class="btn btn-primary" th:text="${editMode} ? '更新' : '登録'"></button>
+                        <a th:href="${editMode} ? @{/customers/{id}(id=${customer.id})} : @{/customers}"
+                           class="btn btn-default">キャンセル</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

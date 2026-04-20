@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('保険料計算')}"></head>
+<body>
+<nav th:replace="~{layout :: navbar}"></nav>
+
+<div class="container">
+    <h2>保険料シミュレーション</h2>
+    <hr/>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 class="panel-title">計算条件を入力</h3></div>
+                <div class="panel-body">
+                    <form th:action="@{/premium-calculator}" method="get" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">保険種別 <span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <select name="policyType" class="form-control" required="required">
+                                    <option value="">-- 選択 --</option>
+                                    <option value="LIFE" th:selected="${policyType == 'LIFE'}">生命保険</option>
+                                    <option value="MEDICAL" th:selected="${policyType == 'MEDICAL'}">医療保険</option>
+                                    <option value="AUTO" th:selected="${policyType == 'AUTO'}">自動車保険</option>
+                                    <option value="FIRE" th:selected="${policyType == 'FIRE'}">火災保険</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">年齢 <span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="number" name="age" class="form-control" th:value="${age}"
+                                       min="1" max="120" placeholder="30" required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">喫煙者</label>
+                            <div class="col-sm-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="isSmoker" value="true"
+                                               th:checked="${isSmoker}"/> はい
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-primary">計算する</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 計算結果 -->
+        <div class="col-md-6" th:if="${result != null}">
+            <div class="panel panel-success">
+                <div class="panel-heading"><h3 class="panel-title">計算結果</h3></div>
+                <div class="panel-body text-center">
+                    <h1 style="color:#2c3e50;">
+                        <span th:text="${#numbers.formatDecimal(result, 0, 'COMMA', 0, 'POINT')}"></span>
+                        <small>円/月</small>
+                    </h1>
+                    <hr/>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>保険種別</th>
+                            <td>
+                                <span th:if="${policyType == 'LIFE'}">生命保険</span>
+                                <span th:if="${policyType == 'MEDICAL'}">医療保険</span>
+                                <span th:if="${policyType == 'AUTO'}">自動車保険</span>
+                                <span th:if="${policyType == 'FIRE'}">火災保険</span>
+                            </td>
+                        </tr>
+                        <tr><th>年齢</th><td th:text="${age} + '歳'"></td></tr>
+                        <tr><th>喫煙者</th><td th:text="${isSmoker} ? 'はい' : 'いいえ'"></td></tr>
+                    </table>
+                    <p class="text-muted"><small>※税込金額です。実際の保険料は審査により異なる場合があります。</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

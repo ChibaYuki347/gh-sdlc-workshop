@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('顧客一覧')}"></head>
+<body>
+<nav th:replace="~{layout :: navbar}"></nav>
+
+<div class="container">
+    <h2>顧客一覧</h2>
+    <hr/>
+
+    <!-- 検索バー -->
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form th:action="@{/customers}" method="get" class="form-inline">
+                <div class="form-group">
+                    <label for="keyword">検索:</label>
+                    <input type="text" id="keyword" name="keyword" class="form-control"
+                           placeholder="氏名・メール・契約番号" th:value="${keyword}" style="width:300px;"/>
+                </div>
+                <button type="submit" class="btn btn-primary">検索</button>
+                <a th:href="@{/customers}" class="btn btn-default">クリア</a>
+                <a th:href="@{/customers/new}" class="btn btn-success pull-right">+ 新規登録</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- フラッシュメッセージ -->
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+    <!-- 検索結果 -->
+    <div th:if="${keyword}" class="alert alert-info">
+        「<span th:text="${keyword}"></span>」の検索結果: <strong th:text="${#lists.size(customers)}"></strong>件
+    </div>
+
+    <!-- 顧客テーブル -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">顧客リスト（全<span th:text="${#lists.size(customers)}"></span>件）</h3>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>氏名</th>
+                    <th>メール</th>
+                    <th>電話番号</th>
+                    <th>契約番号</th>
+                    <th>契約種別</th>
+                    <th>ステータス</th>
+                    <th>保険料</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="c : ${customers}">
+                    <td th:text="${c.id}"></td>
+                    <td><a th:href="@{/customers/{id}(id=${c.id})}" th:text="${c.getFullName()}"></a></td>
+                    <td th:text="${c.email}"></td>
+                    <td th:text="${c.phone}"></td>
+                    <td th:text="${c.policyNumber}"></td>
+                    <td>
+                        <span th:if="${c.policyType == 'LIFE'}">生命保険</span>
+                        <span th:if="${c.policyType == 'MEDICAL'}">医療保険</span>
+                        <span th:if="${c.policyType == 'AUTO'}">自動車保険</span>
+                        <span th:if="${c.policyType == 'FIRE'}">火災保険</span>
+                    </td>
+                    <td>
+                        <span th:if="${c.policyStatus == 0}" class="label label-warning">申請中</span>
+                        <span th:if="${c.policyStatus == 1}" class="label label-success">有効</span>
+                        <span th:if="${c.policyStatus == 2}" class="label label-danger">失効</span>
+                        <span th:if="${c.policyStatus == 3}" class="label label-default">解約</span>
+                    </td>
+                    <td th:text="${#numbers.formatDecimal(c.premiumAmount, 0, 'COMMA', 0, 'POINT')} + '円'"></td>
+                    <td>
+                        <a th:href="@{/customers/{id}(id=${c.id})}" class="btn btn-xs btn-info">詳細</a>
+                        <a th:href="@{/customers/{id}/edit(id=${c.id})}" class="btn btn-xs btn-warning">編集</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(customers)}">
+                    <td colspan="9" class="text-center">顧客データがありません</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
