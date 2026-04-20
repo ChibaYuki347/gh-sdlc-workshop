@@ -35,7 +35,7 @@
 - VS Code 拡張機能：GitHub Copilot / GitHub Copilot Chat
 - Java Development Kit (JDK) 17以上
 - Apache Maven 3.8以上
-- Node.js 18以上（Spec Kit 使用時のみ・オプション）
+- Python 3.11以上 + uv（Spec Kit 使用時のみ・オプション）
 
 ### ネットワーク要件
 - GitHub（github.com）へのアクセス

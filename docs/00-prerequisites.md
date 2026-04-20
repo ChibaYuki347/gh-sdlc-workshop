@@ -31,13 +31,17 @@
   # Apache Maven 3.8.x 以上が表示されること
   ```
 
-### Node.js（Spec Kit 使用時のみ・オプション）
-- **Node.js 18以上** がインストールされていること
+### Python + uv（Spec Kit 使用時のみ・オプション）
+- **Python 3.11以上** がインストールされていること
   ```bash
-  node -version
-  # v18.x.x 以上が表示されること
+  python3 --version
+  # Python 3.11.x 以上が表示されること
   ```
-  > Spec Kit を使用する場合に必要です（`npx @github/specify init`）。
+- **uv**（Python パッケージマネージャ）がインストールされていること
+  ```bash
+  uv --version
+  ```
+  > Spec Kit を使用する場合に必要です（`uv tool install specify-cli`）。
   > ネイティブ機能のみで SDD を行う場合は不要です。
 
 ### Git
