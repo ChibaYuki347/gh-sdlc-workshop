@@ -1,7 +1,7 @@
-package com.zurich.crm.controller;
+package com.example.crm.controller;
 
-import com.zurich.crm.model.Customer;
-import com.zurich.crm.service.CustomerService;
+import com.example.crm.model.Customer;
+import com.example.crm.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

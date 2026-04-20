@@ -1,4 +1,4 @@
-package com.zurich.crm.model;
+package com.example.crm.model;
 
 import jakarta.persistence.*;
 import java.util.Date;

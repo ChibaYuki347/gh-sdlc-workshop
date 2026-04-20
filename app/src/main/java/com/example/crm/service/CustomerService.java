@@ -1,9 +1,9 @@
-package com.zurich.crm.service;
+package com.example.crm.service;
 
-import com.zurich.crm.model.Customer;
-import com.zurich.crm.model.Policy;
-import com.zurich.crm.repository.CustomerRepository;
-import com.zurich.crm.repository.PolicyRepository;
+import com.example.crm.model.Customer;
+import com.example.crm.model.Policy;
+import com.example.crm.repository.CustomerRepository;
+import com.example.crm.repository.PolicyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

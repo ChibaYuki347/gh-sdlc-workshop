@@ -12,10 +12,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.zurich</groupId>
-    <artifactId>crm</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>insurance-crm</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Zurich CRM</name>
+    <name>Insurance CRM</name>
     <description>擬似保険CRMアプリケーション - ワークショップ用</description>
 
     <properties>

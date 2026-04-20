@@ -18,15 +18,15 @@
 
 #### 午前中に作成した仕様書からの実装
 
-セッション3で作成した「契約更新通知機能」の仕様書を元に、Copilot を使って実装します。
+午前中に Spec Kit で作成した仕様書（`.specify/spec.md`）を元に、Copilot を使って実装します。
 
 #### Step 1: Copilot Agent Mode で実装を依頼する
 
-VS Code の Copilot Chat で Agent Mode（`@workspace`）を使用:
+VS Code の Copilot Chat で Agent Mode を使用:
 
 ```
 プロンプト:
-「specs/ 配下の仕様書に基づいて、契約更新通知機能を実装してください。
+「.specify/spec.md の仕様に基づいて、契約更新通知機能を実装してください。
 
 以下のファイルを作成・修正してください:
 1. RenewalNotificationService.java - 更新通知のビジネスロジック

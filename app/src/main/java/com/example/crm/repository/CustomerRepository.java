@@ -1,6 +1,6 @@
-package com.zurich.crm.repository;
+package com.example.crm.repository;
 
-import com.zurich.crm.model.Customer;
+import com.example.crm.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;

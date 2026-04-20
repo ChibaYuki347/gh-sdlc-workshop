@@ -1,6 +1,6 @@
-package com.zurich.crm.repository;
+package com.example.crm.repository;
 
-import com.zurich.crm.model.Policy;
+import com.example.crm.model.Policy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 

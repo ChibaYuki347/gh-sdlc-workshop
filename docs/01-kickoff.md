@@ -72,17 +72,25 @@ Phase 3: AIエージェント（Copilot Agent Mode）
 
 #### 仕様駆動開発（Spec-Driven Development）とは
 
+GitHub Spec Kit を使った SDD は 4 つのフェーズで構成されます:
+
 ```
-1. 仕様書（Markdown）を作成
-   ↓ AIが仕様を理解
-2. 実装コードの自動生成
-   ↓ AIがテストも生成
-3. テストコードの自動生成
-   ↓ 人間がレビュー
-4. Pull Request でコードレビュー
+1. Specify（/speckit.specify）
+   仕様書を作成 — What/Why を定義
+   ↓ AIが仕様を構造化
+2. Plan（/speckit.plan）
+   技術計画を立案 — How を決定
+   ↓ AIが設計を提案
+3. Tasks（/speckit.tasks）
+   実装タスクに分解 — 具体的な作業単位
+   ↓ タスクを GitHub Issues に登録
+4. Implement（Copilot Agent）
+   タスクに基づいてコードを生成
+   ↓ 人間がレビュー・マージ
 ```
 
-**ポイント**: 「何を作るか（What）」を人間が定義し、「どう作るか（How）」をAIが支援する
+**ポイント**: 「何を作るか（What）」を人間が定義し、「どう作るか（How）」をAIが支援する。
+仕様・計画・タスクはすべてリポジトリ内（`.specify/`）で管理され、変更履歴が追跡可能。
 
 ### 4. 本日の進め方（5分）
 
