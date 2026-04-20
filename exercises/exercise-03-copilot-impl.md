@@ -14,7 +14,7 @@
 
 ## 📋 シナリオ
 
-演習2で Spec Kit を使って作成した「契約更新通知機能」の仕様書（`.specify/spec.md`）を元に、実際のコードを実装します。
+演習2で作成した「契約更新通知機能」の仕様書（`specs/renewal-notification/spec.md`）を元に、実際のコードを実装します。
 
 ---
 
@@ -33,7 +33,7 @@ git checkout -b feature/team-X-renewal-notification
 VS Code の Copilot Chat を開き、以下のプロンプトを入力:
 
 ```
-@workspace .specify/spec.md の仕様に基づいて、
+@workspace specs/renewal-notification/spec.md の仕様に基づいて、
 契約更新通知機能を実装してください。
 
 以下のファイルを作成してください:

@@ -38,8 +38,8 @@
 ┌─────────────────────────────────────────────────────┐
 │                  GitHub Platform                     │
 │                                                      │
-│  ① Spec Kit    仕様策定（Specify → Plan → Tasks）    │
-│       ↓                                              │
+│  ① 仕様策定    Copilot Chat + Prompt Files で仕様を作成  │
+│       ↓        （Spec Kit 等のアクセラレータも利用可能）   │
 │  ② Issues      タスクを Issue として登録              │
 │       ↓                                              │
 │  ③ Coding Agent Issue をアサイン → 自動で実装・PR作成 │
@@ -97,7 +97,7 @@ GitHub Copilot ファミリー:
 **ハンズオンシナリオ**: 擬似保険CRMアプリ（Java/Spring Boot）
 
 **本日体験するループ**:
-1. Spec Kit で仕様を書く → Issue 登録
+1. 仕様を書く（Copilot Chat + Prompt Files / Spec Kit）→ Issue 登録
 2. Coding Agent が自動で実装 → PR が上がってくる
 3. IDE で Copilot と協働してリファクタリング
 4. Copilot Code Review + テスト + セキュリティチェック → Merge

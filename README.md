@@ -6,7 +6,7 @@
 
 ### ハンズオンシナリオ
 
-**既存改修シナリオ（メイン）**：擬似保険CRMアプリケーション（Java/Spring Boot）を題材に、GitHub Platform の統合開発ループ（Spec Kit → Issue → Coding Agent → PR → Copilot Review → Merge）を体験します。
+**既存改修シナリオ（メイン）**：擬似保険CRMアプリケーション（Java/Spring Boot）を題材に、GitHub Platform の統合開発ループ（仕様策定 → Issue → Coding Agent → PR → Copilot Review → Merge）を体験します。
 
 ## 🕐 タイムテーブル
 
@@ -15,7 +15,7 @@
 | 09:00 - 09:45 | [1. キックオフ](docs/01-kickoff.md) | GitHub Platform が実現する AI 開発ライフサイクル |
 | 09:45 - 10:30 | [2. 環境セットアップ](docs/02-github-basics.md) | GitHub Flow の基礎と Spec Kit 初期化 |
 | 10:30 - 10:45 | 休憩 | |
-| 10:45 - 12:00 | [3. Spec Kit + Coding Agent](docs/03-sdd-requirements.md) | 仕様 → Issue → 自動実装 → PR の一気通貫体験 |
+| 10:45 - 12:00 | [3. 仕様駆動開発（SDD）](docs/03-sdd-requirements.md) | ネイティブ機能 + Coding Agent で仕様 → Issue → 自動実装 → PR |
 | 12:00 - 13:00 | 昼休憩 | |
 | 13:00 - 14:30 | [4. IDE × Copilot 協働開発](docs/04-implementation.md) | レガシーコード理解・リファクタリング・人間とAIの役割分担 |
 | 14:30 - 14:45 | 休憩 | |
@@ -35,7 +35,7 @@
 - VS Code 拡張機能：GitHub Copilot / GitHub Copilot Chat
 - Java Development Kit (JDK) 17以上
 - Apache Maven 3.8以上
-- Node.js 18以上（Spec Kit 実行用）
+- Node.js 18以上（Spec Kit 使用時のみ・オプション）
 
 ### ネットワーク要件
 - GitHub（github.com）へのアクセス
@@ -46,9 +46,12 @@
 
 ```
 ├── README.md                 # 本ファイル
+├── .github/
+│   ├── copilot-instructions.md  # Copilot プロジェクト設定
+│   └── prompts/                 # 再利用可能な Prompt Files（SDD用）
 ├── docs/                     # セッション資料
 ├── exercises/                # ハンズオン演習手順
-├── specs/                    # 仕様書テンプレート（Spec Kit 参考用）
+├── specs/                    # 仕様書テンプレート・成果物格納先
 └── app/                      # 擬似CRMアプリケーション（Java/Spring Boot）
 ```
 

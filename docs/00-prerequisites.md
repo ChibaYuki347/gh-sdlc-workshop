@@ -31,13 +31,14 @@
   # Apache Maven 3.8.x 以上が表示されること
   ```
 
-### Node.js（Spec Kit 用）
+### Node.js（Spec Kit 使用時のみ・オプション）
 - **Node.js 18以上** がインストールされていること
   ```bash
   node -version
   # v18.x.x 以上が表示されること
   ```
-  > Spec Kit の初期化（`npx @github/specify init`）に必要です
+  > Spec Kit を使用する場合に必要です（`npx @github/specify init`）。
+  > ネイティブ機能のみで SDD を行う場合は不要です。
 
 ### Git
 - **Git** がインストールされていること

@@ -169,7 +169,7 @@ PR の品質ゲート:
 
 > 💡 **トレーサビリティの完成**:
 > ```
-> 仕様（.specify/spec.md）
+> 仕様（specs/.../spec.md）
 >   → Issue #XX（要件の単位）
 >     → Branch（作業場所）
 >       → PR #YY（変更セット）

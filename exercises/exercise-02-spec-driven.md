@@ -1,15 +1,15 @@
-# 演習2: Spec Kit + Coding Agent による仕様駆動開発
+# 演習2: 仕様駆動開発 — ネイティブ機能で仕様からIssueまで
 
-**対応セッション**: セッション3 - Spec Kit + Copilot Coding Agent
+**対応セッション**: セッション3 - 仕様駆動開発（SDD）
 **所要時間**: 約45分
 
 ---
 
 ## 🎯 演習のゴール
 
-- Spec Kit の Specify → Plan → Tasks フローを体験する
-- GitHub Issue を作成し、Copilot Coding Agent にアサインする
-- **仕様 → Issue → 自動実装 → PR** の一気通貫フローを体験する
+- GitHub ネイティブ機能（Copilot Chat + Prompt Files）で SDD を体験する
+- 仕様 → 計画 → タスク分解 → Issue 作成の流れを実践する
+- Copilot Coding Agent にアサインし、自動実装の体験をする
 
 ---
 
@@ -24,14 +24,19 @@
 
 ## 📝 演習手順
 
-### Phase 1: Spec Kit で仕様を作成する（15分）
+### Phase 1: 仕様を作成する（15分）
 
 #### Step 1: Specify — 仕様の作成
 
-Copilot Chat で `/speckit.specify` コマンドを実行:
+Copilot Chat を開き、以下のいずれかの方法で仕様を作成します。
+
+**方法A: Prompt File を使う場合**（推奨）
+
+> VS Code の Copilot Chat で `/specify` と入力すると、
+> `.github/prompts/specify.prompt.md` がスラッシュコマンドとして利用できます。
 
 ```
-/speckit.specify
+/specify
 
 保険CRMアプリケーションに「契約更新通知機能」を追加したいです。
 
@@ -51,31 +56,63 @@ Copilot Chat で `/speckit.specify` コマンドを実行:
 - 対象リストを返すREST APIとして提供
 ```
 
-> `.specify/spec.md` が生成されます
+**方法B: 直接プロンプトで作成する場合**（Fallback）
+
+```
+@workspace このプロジェクトのアーキテクチャを踏まえて、
+以下の要件の機能仕様書をMarkdownで作成してください。
+
+概要、ユーザーストーリー、機能要件、API設計、
+データモデル、エッジケース、受け入れ条件を含めてください。
+
+要件: 保険契約の更新日が30日以内に迫っている顧客を
+リストアップするREST APIを追加する。
+営業担当者別のフィルタ機能も必要。
+```
 
 #### Step 2: チームでレビュー
 
 - **ビジネスメンバー**: 要件・受け入れ条件が妥当か確認
 - **ITメンバー**: 技術的な実現性・エッジケースを確認
 
-必要に応じて `.specify/spec.md` を直接編集してください。
+必要に応じて出力内容を修正してください。
 
-#### Step 3: Plan → Tasks
+#### Step 3: ファイルに保存
 
-```
-/speckit.plan
-```
-> `.specify/plan.md` が生成されます
-
-```
-/speckit.tasks
-```
-> `.specify/tasks.md` が生成されます
-
-#### Step 4: コミット
+Copilot Chat の出力を `Open in Editor` でファイルに保存:
 
 ```bash
-git add .specify/
+# ディレクトリ作成
+mkdir -p specs/renewal-notification
+
+# Copilot Chat の出力を以下に保存
+# specs/renewal-notification/spec.md
+```
+
+#### Step 4: Plan → Tasks
+
+**Plan（実装計画）**:
+```
+/plan
+
+specs/renewal-notification/spec.md を読んで実装計画を作成してください。
+変更対象ファイル、実装ステップ、テスト戦略を含めてください。
+```
+> 出力を `specs/renewal-notification/plan.md` に保存
+
+**Tasks（タスク分解）**:
+```
+/tasks
+
+specs/renewal-notification/plan.md を読んでタスク一覧に分解してください。
+各タスクは GitHub Issue として登録できる粒度にしてください。
+```
+> 出力を `specs/renewal-notification/tasks.md` に保存
+
+#### Step 5: コミット
+
+```bash
+git add specs/renewal-notification/
 git commit -m "docs: 契約更新通知機能の仕様・計画・タスクを追加"
 git push
 ```
@@ -84,7 +121,7 @@ git push
 
 #### Step 1: タスクを Issue に登録
 
-`.specify/tasks.md` から **1つ** のタスクを選び、GitHub Issue を作成:
+`specs/renewal-notification/tasks.md` から **1つ** のタスクを選び、GitHub Issue を作成:
 
 ```markdown
 タイトル: feat: 契約更新通知APIの実装
@@ -108,7 +145,7 @@ REST API エンドポイントを実装する。
 ## 技術情報
 - 既存の Customer, Policy モデルと Repository を使用
 - Spring Boot の規約に従う
-- .specify/spec.md の仕様に準拠
+- 詳細仕様: specs/renewal-notification/spec.md
 ```
 
 #### Step 2: Coding Agent にアサイン
@@ -127,7 +164,7 @@ REST API エンドポイントを実装する。
 ```
 確認チェックリスト:
 □ PR のタイトルと説明は Issue の要件を反映しているか
-□ 作成されたコードは仕様（.specify/spec.md）に準拠しているか
+□ 作成されたコードは仕様に準拠しているか
 □ テストコードが含まれているか
 □ Issue → Branch → PR のトレーサビリティが確認できるか
 ```
@@ -144,9 +181,9 @@ REST API エンドポイントを実装する。
 
 ## ✅ 完了条件
 
-- [ ] `.specify/spec.md`（仕様書）が作成されている
-- [ ] `.specify/plan.md`（技術計画）が作成されている
-- [ ] `.specify/tasks.md`（タスク一覧）が作成されている
+- [ ] `specs/renewal-notification/spec.md`（仕様書）が作成されている
+- [ ] `specs/renewal-notification/plan.md`（技術計画）が作成されている
+- [ ] `specs/renewal-notification/tasks.md`（タスク一覧）が作成されている
 - [ ] GitHub Issue が作成され、Copilot がアサインされている
 - [ ] 事前準備済み or 自チームの Coding Agent PR を確認済み
 
@@ -158,3 +195,4 @@ REST API エンドポイントを実装する。
 2. Coding Agent に「任せられること」と「人間が判断すべきこと」の境界はどこか？
 3. このフローを自社の開発プロセスに適用する場合、何が変わるか？
 4. 仕様 → コード → マージのトレーサビリティは、監査・コンプライアンスにどう役立つか？
+5. Spec Kit のようなツールを導入するメリット・デメリットは何か？

@@ -21,7 +21,7 @@
 各チーム、以下の観点で本日の成果を共有してください:
 
 ```
-1. Spec Kit で作成した仕様と、Coding Agent が生成した PR の結果
+1. 仕様の作成と、Coding Agent が生成した PR の結果
 2. IDE × Agent Mode でのリファクタリング体験
 3. Copilot Code Review の指摘で発見できたこと
 4. 「GitHub Platform だからこそ」と感じたポイント
@@ -30,8 +30,9 @@
 #### 本日体験した GitHub Platform の統合開発ループ
 
 ```
-① Spec Kit（セッション3）
-   └ 仕様 → 技術計画 → タスク分解
+① 仕様駆動開発 — SDD（セッション3）
+   └ Copilot Chat + Prompt Files で仕様 → 計画 → タスク分解
+   └ （Spec Kit をアクセラレータとして活用可能）
 
 ② Issue → Coding Agent（セッション3）
    └ Issue をアサイン → Agent が自律的に実装 → PR 自動作成
