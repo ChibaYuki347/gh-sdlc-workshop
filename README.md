@@ -6,21 +6,21 @@
 
 ### ハンズオンシナリオ
 
-**既存改修シナリオ（メイン）**：擬似保険CRMアプリケーション（Java/Spring Boot）を題材に、Copilot を活用したレガシーコード理解・リファクタリング・機能追加を体験します。
+**既存改修シナリオ（メイン）**：擬似保険CRMアプリケーション（Java/Spring Boot）を題材に、GitHub Platform の統合開発ループ（Spec Kit → Issue → Coding Agent → PR → Copilot Review → Merge）を体験します。
 
 ## 🕐 タイムテーブル
 
 | 時間 | セッション | 内容 |
 |------|-----------|------|
-| 09:00 - 09:45 | [1. キックオフ](docs/01-kickoff.md) | 次世代開発ライフサイクルの全体像 |
-| 09:45 - 10:30 | [2. 環境セットアップ](docs/02-github-basics.md) | GitHubプラットフォームの基礎操作 |
+| 09:00 - 09:45 | [1. キックオフ](docs/01-kickoff.md) | GitHub Platform が実現する AI 開発ライフサイクル |
+| 09:45 - 10:30 | [2. 環境セットアップ](docs/02-github-basics.md) | GitHub Flow の基礎と Spec Kit 初期化 |
 | 10:30 - 10:45 | 休憩 | |
-| 10:45 - 12:00 | [3. 要件定義とSDD](docs/03-sdd-requirements.md) | AI活用の仕様駆動開発 |
+| 10:45 - 12:00 | [3. Spec Kit + Coding Agent](docs/03-sdd-requirements.md) | 仕様 → Issue → 自動実装 → PR の一気通貫体験 |
 | 12:00 - 13:00 | 昼休憩 | |
-| 13:00 - 14:30 | [4. 実装とリファクタリング](docs/04-implementation.md) | Copilotによるコード生成・改善 |
+| 13:00 - 14:30 | [4. IDE × Copilot 協働開発](docs/04-implementation.md) | レガシーコード理解・リファクタリング・人間とAIの役割分担 |
 | 14:30 - 14:45 | 休憩 | |
-| 14:45 - 16:00 | [5. テストとコードレビュー](docs/05-testing-review.md) | テスト自動生成・セキュアレビュー |
-| 16:00 - 17:00 | [6. ラップアップ](docs/06-wrapup.md) | 振り返りと質疑応答 |
+| 14:45 - 16:00 | [5. PR を中心とした品質ゲート](docs/05-testing-review.md) | Copilot Code Review・テスト自動生成・セキュリティチェック・マージ |
+| 16:00 - 17:00 | [6. ラップアップ](docs/06-wrapup.md) | 振り返り・導入ロードマップ・質疑応答 |
 
 ## 🛠️ 事前準備
 

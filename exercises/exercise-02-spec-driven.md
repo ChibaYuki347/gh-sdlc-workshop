@@ -1,15 +1,15 @@
-# 演習2: 仕様駆動開発（SDD）演習 — Spec Kit を使う
+# 演習2: Spec Kit + Coding Agent による仕様駆動開発
 
-**対応セッション**: セッション3 - AIを活用した要件定義と仕様駆動開発
+**対応セッション**: セッション3 - Spec Kit + Copilot Coding Agent
 **所要時間**: 約45分
 
 ---
 
 ## 🎯 演習のゴール
 
-- GitHub Spec Kit の 4 フェーズ（Specify → Plan → Tasks → Implement）を体験する
-- ビジネスメンバーとITメンバーが協働して仕様を作成・レビューする
-- 仕様書・技術計画・タスク一覧がリポジトリで管理される流れを理解する
+- Spec Kit の Specify → Plan → Tasks フローを体験する
+- GitHub Issue を作成し、Copilot Coding Agent にアサインする
+- **仕様 → Issue → 自動実装 → PR** の一気通貫フローを体験する
 
 ---
 
@@ -24,34 +24,11 @@
 
 ## 📝 演習手順
 
-### Phase 1: Spec Kit の初期化（5分）
+### Phase 1: Spec Kit で仕様を作成する（15分）
 
-#### Spec Kit をプロジェクトにセットアップ
+#### Step 1: Specify — 仕様の作成
 
-```bash
-# Spec Kit の初期化
-npx @github/specify init
-```
-
-初期化が完了すると、以下のディレクトリが生成されます:
-
-```
-.specify/              ← 仕様・計画・タスクの格納先
-.github/
-├── prompts/           ← Copilot Chat スラッシュコマンド
-└── copilot-instructions.md  ← プロジェクトのコンテキスト
-```
-
-> ⚠️ 初期化がうまくいかない場合は、手動で `.specify/` ディレクトリを作成してください:
-> ```bash
-> mkdir -p .specify
-> ```
-
-### Phase 2: Specify — 仕様の作成（15分）
-
-**全員で実施**
-
-VS Code の Copilot Chat で `/speckit.specify` コマンドを実行:
+Copilot Chat で `/speckit.specify` コマンドを実行:
 
 ```
 /speckit.specify
@@ -60,9 +37,8 @@ VS Code の Copilot Chat で `/speckit.specify` コマンドを実行:
 
 【背景】
 - 保険契約には更新日（endDate）がある
-- 更新日を過ぎると契約が失効する
-- 現在は営業担当者が手動で更新日を確認している
-- 更新漏れによる失効が月に数件発生している
+- 更新日を過ぎると契約が失効し、営業担当者の手動確認では漏れが発生
+- 月に数件の更新漏れによる失効が起きている
 
 【既存システム情報】
 - Java/Spring Boot のWebアプリケーション
@@ -71,87 +47,114 @@ VS Code の Copilot Chat で `/speckit.specify` コマンドを実行:
 
 【要望】
 - 更新日が30日以内の顧客をリストアップするAPI
-- 営業担当者別にフィルタできる機能
-- 通知対象の一覧を CSV でエクスポートできると嬉しい
+- 営業担当者別にフィルタできる
+- 対象リストを返すREST APIとして提供
 ```
 
-> Spec Kit が `.specify/spec.md` に構造化された仕様書を生成します
+> `.specify/spec.md` が生成されます
 
-#### チームで仕様書をレビュー
+#### Step 2: チームでレビュー
 
-生成された `.specify/spec.md` を開いて、チーム内で以下を確認:
+- **ビジネスメンバー**: 要件・受け入れ条件が妥当か確認
+- **ITメンバー**: 技術的な実現性・エッジケースを確認
 
-- **ビジネスメンバー**: 要件が正確か？ビジネス価値が反映されているか？受け入れ条件は十分か？
-- **ITメンバー**: 技術的に実現可能か？既存アーキテクチャとの整合性は？エッジケースは網羅されているか？
+必要に応じて `.specify/spec.md` を直接編集してください。
 
-必要に応じて仕様書を直接編集してください。
-
-### Phase 3: Plan — 技術計画の立案（10分）
-
-仕様書が確定したら、Copilot Chat で技術計画を作成:
+#### Step 3: Plan → Tasks
 
 ```
 /speckit.plan
 ```
-
-> Spec Kit が `.specify/plan.md` に技術計画を生成します
-
-#### 計画の確認ポイント
-
-```
-□ 使用する技術スタック（Spring Boot + JPA で既存と整合するか）
-□ データモデルの設計（Customer / Policy との関連）
-□ API の設計方針（RESTful、エラーハンドリング）
-□ パフォーマンスの考慮（大量データへの対応）
-□ セキュリティの考慮（認証・認可）
-```
-
-### Phase 4: Tasks — タスク分解（10分）
-
-技術計画が確定したら、実装タスクに分解:
+> `.specify/plan.md` が生成されます
 
 ```
 /speckit.tasks
 ```
+> `.specify/tasks.md` が生成されます
 
-> Spec Kit が `.specify/tasks.md` にタスク一覧を生成します
-
-#### タスクを GitHub Issues に登録
-
-生成されたタスクを確認し、GitHub Issues として登録してください:
-
-1. GitHub リポジトリで **Issues** タブを開く
-2. 各タスクを Issue として作成
-3. ラベル（`feat`, `refactor`, `test` 等）を付与
-4. チームメンバーにアサイン
-
-### Phase 5: 成果物のコミット（5分）
+#### Step 4: コミット
 
 ```bash
-# Spec Kit の成果物をコミット
-git add .specify/ .github/
-git commit -m "docs: 契約更新通知機能の仕様・計画・タスクを追加（Spec Kit）"
-git push origin feature/team-X-renewal-notification
+git add .specify/
+git commit -m "docs: 契約更新通知機能の仕様・計画・タスクを追加"
+git push
 ```
+
+### Phase 2: Issue 作成 → Coding Agent にアサイン（15分）
+
+#### Step 1: タスクを Issue に登録
+
+`.specify/tasks.md` から **1つ** のタスクを選び、GitHub Issue を作成:
+
+```markdown
+タイトル: feat: 契約更新通知APIの実装
+
+## 概要
+保険契約の更新日が指定日数以内に迫っている顧客をリストアップする
+REST API エンドポイントを実装する。
+
+## 仕様
+- エンドポイント: GET /api/notifications/renewals
+- パラメータ: daysBeforeExpiry (デフォルト: 30)
+- ステータスが有効(ACTIVE)の契約のみ対象
+- endDate が null の契約は除外
+- 結果を更新日の昇順でソート
+
+## 受け入れ条件
+- [ ] エンドポイントが正しく動作する
+- [ ] テストコードが含まれている
+- [ ] 既存のコードに影響がない
+
+## 技術情報
+- 既存の Customer, Policy モデルと Repository を使用
+- Spring Boot の規約に従う
+- .specify/spec.md の仕様に準拠
+```
+
+#### Step 2: Coding Agent にアサイン
+
+1. Issue の **Assignees** に `Copilot` を追加
+2. Coding Agent が自動で実行を開始
+
+> ⏳ Agent の実行中は次の Phase に進みましょう
+
+### Phase 3: 完了 PR の確認（15分）
+
+#### 事前準備済みの PR を確認
+
+講師が事前に用意した Coding Agent の完了 PR を確認します:
+
+```
+確認チェックリスト:
+□ PR のタイトルと説明は Issue の要件を反映しているか
+□ 作成されたコードは仕様（.specify/spec.md）に準拠しているか
+□ テストコードが含まれているか
+□ Issue → Branch → PR のトレーサビリティが確認できるか
+```
+
+#### 自チームの Agent PR（完成していれば）
+
+自チームがアサインした Issue の PR が完成していれば:
+
+1. PR の内容を確認
+2. 仕様との整合性をチームで検証
+3. ビジネスメンバーが受け入れ条件をチェック
 
 ---
 
 ## ✅ 完了条件
 
-- [ ] Spec Kit が初期化されている（`.specify/` ディレクトリが存在）
 - [ ] `.specify/spec.md`（仕様書）が作成されている
 - [ ] `.specify/plan.md`（技術計画）が作成されている
 - [ ] `.specify/tasks.md`（タスク一覧）が作成されている
-- [ ] 実装タスクが GitHub Issues に登録されている
-- [ ] 成果物がコミットされている
+- [ ] GitHub Issue が作成され、Copilot がアサインされている
+- [ ] 事前準備済み or 自チームの Coding Agent PR を確認済み
 
 ---
 
 ## 💬 ディスカッションポイント
 
-演習後、チーム内で以下を議論してください:
-
-1. Spec Kit の Specify → Plan → Tasks の流れで、何が一番有用だと感じたか？
-2. ビジネスメンバーとITメンバーの役割分担は適切だったか？
-3. 仕様書がリポジトリで管理されるメリットは何か？
-4. この仕様書があれば、実装の手戻りはどの程度防げそうか？
+1. 仕様 → Issue → 自動実装 → PR のフローで、一番価値を感じたのはどこか？
+2. Coding Agent に「任せられること」と「人間が判断すべきこと」の境界はどこか？
+3. このフローを自社の開発プロセスに適用する場合、何が変わるか？
+4. 仕様 → コード → マージのトレーサビリティは、監査・コンプライアンスにどう役立つか？
