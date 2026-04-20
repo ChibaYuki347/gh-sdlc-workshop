@@ -38,6 +38,26 @@ mvn clean compile
 
 > **期待結果**: `BUILD SUCCESS` と表示される
 
+#### アプリケーションの起動確認
+
+```bash
+mvn spring-boot:run
+```
+
+> **期待結果**: `Started CrmApplication` と表示され、アプリが起動する
+
+ブラウザで以下にアクセスして動作を確認:
+
+| URL | ページ |
+|-----|--------|
+| http://localhost:8080/ | ダッシュボード（顧客統計・クイック操作） |
+| http://localhost:8080/customers | 顧客一覧（検索・ステータスバッジ付き） |
+| http://localhost:8080/customers/1 | 顧客詳細（田中太郎さんの契約情報） |
+| http://localhost:8080/premium-calculator | 保険料シミュレーション |
+| http://localhost:8080/report | 月次レポート |
+
+> 確認できたら `Ctrl+C` でアプリを停止してください。
+
 ### 2. GitHub Flow の基本操作（20分）
 
 #### GitHub Flow — プラットフォーム開発の基盤
