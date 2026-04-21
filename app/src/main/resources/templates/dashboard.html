@@ -44,6 +44,21 @@
         </div>
     </div>
 
+    <!-- 更新間近アラート -->
+    <div class="row">
+        <div class="col-md-12">
+            <div th:if="${upcomingRenewalCount != null and upcomingRenewalCount > 0}"
+                 class="alert alert-warning" style="font-size:16px;">
+                &#x1F514; <strong th:text="${upcomingRenewalCount}"></strong> 件の契約が30日以内に更新日を迎えます。
+                <a th:href="@{/renewals}" class="btn btn-warning btn-sm" style="margin-left:10px;">更新通知を確認</a>
+            </div>
+            <div th:if="${upcomingRenewalCount == null or upcomingRenewalCount == 0}"
+                 class="alert alert-success">
+                &#x2705; 30日以内に更新日が来る契約はありません。
+            </div>
+        </div>
+    </div>
+
     <!-- クイックリンク -->
     <div class="row">
         <div class="col-md-6">
@@ -53,10 +68,13 @@
                     <a th:href="@{/customers/new}" class="btn btn-primary btn-lg btn-block" style="margin-bottom:10px;">
                         新規顧客登録
                     </a>
+                    <a th:href="@{/renewals}" class="btn btn-warning btn-lg btn-block" style="margin-bottom:10px;">
+                        &#x1F514; 契約更新通知
+                    </a>
                     <a th:href="@{/premium-calculator}" class="btn btn-info btn-lg btn-block" style="margin-bottom:10px;">
                         保険料シミュレーション
                     </a>
-                    <a th:href="@{/report}" class="btn btn-warning btn-lg btn-block">
+                    <a th:href="@{/report}" class="btn btn-default btn-lg btn-block">
                         月次レポート表示
                     </a>
                 </div>

@@ -2,6 +2,9 @@ package com.example.crm.controller;
 
 import com.example.crm.model.Customer;
 import com.example.crm.service.CustomerService;
+import com.example.crm.service.RenewalNotificationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +21,13 @@ import java.util.Map;
 @Controller
 public class WebController {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebController.class);
+
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private RenewalNotificationService renewalNotificationService;
 
     // ダッシュボード
     @GetMapping("/")
@@ -28,6 +36,14 @@ public class WebController {
         model.addAttribute("report", report);
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("recentCustomers", customers.size() > 5 ? customers.subList(0, 5) : customers);
+        // 30日以内に更新日が来る有効契約件数をダッシュボードに追加
+        try {
+            Map<String, Object> renewalData = renewalNotificationService.getUpcomingRenewals(30, null);
+            model.addAttribute("upcomingRenewalCount", renewalData.get("totalCount"));
+        } catch (Exception e) {
+            logger.warn("Failed to fetch upcoming renewal count for dashboard: {}", e.getMessage());
+            model.addAttribute("upcomingRenewalCount", 0);
+        }
         return "dashboard";
     }
 
@@ -126,5 +142,22 @@ public class WebController {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         return "report";
+    }
+
+    // 契約更新通知一覧
+    @GetMapping("/renewals")
+    public String renewalNotifications(
+            @RequestParam(defaultValue = "30") int daysBeforeExpiry,
+            @RequestParam(required = false) String agentName,
+            Model model) {
+        model.addAttribute("daysBeforeExpiry", daysBeforeExpiry);
+        model.addAttribute("agentName", agentName);
+        try {
+            Map<String, Object> renewalData = renewalNotificationService.getUpcomingRenewals(daysBeforeExpiry, agentName);
+            model.addAttribute("renewalData", renewalData);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+        return "renewals";
     }
 }
