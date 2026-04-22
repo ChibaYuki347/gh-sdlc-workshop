@@ -68,12 +68,12 @@
     "policyType": "LIFE",
     "policyStatus": 1,
     "premiumAmount": 5500.0,
-    "policyStartDate": "2024-01-01",
-    "policyEndDate": "2034-01-01",
+    "policyStartDate": 1704067200000,
+    "policyEndDate": 2019686400000,
     "agentName": "佐藤花子",
     "agentEmail": "sato@example.com",
-    "createdAt": "2024-01-01T00:00:00.000+00:00",
-    "updatedAt": "2024-01-15T10:30:00.000+00:00",
+    "createdAt": 1704067200000,
+    "updatedAt": 1705314600000,
     "fullName": "太郎 山田",
     "policyStatusText": "有効"
   }
