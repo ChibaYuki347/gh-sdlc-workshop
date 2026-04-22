@@ -44,6 +44,21 @@
   > Spec Kit を使用する場合に必要です（`uv tool install specify-cli`）。
   > ネイティブ機能のみで SDD を行う場合は不要です。
 
+  **uv のインストール方法（環境に応じて選択）**:
+  ```bash
+  # 方法1: 公式インストーラ（推奨）
+  # Windows (PowerShell)
+  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+  # 方法2: pip 経由（方法1がブロックされる場合）
+  pip install uv
+
+  # 方法3: インストール済みの Python 環境がある場合
+  python -m pip install uv
+  ```
+
+  > ⚠️ 社内ネットワークでインストールがブロックされる場合は、IT部門にご相談ください。
+
 ### Git
 - **Git** がインストールされていること
   ```bash

@@ -17,7 +17,7 @@
 | 10:30 - 10:45 | 休憩 | |
 | 10:45 - 12:00 | [3. 仕様駆動開発（SDD）](docs/03-sdd-requirements.md) | ネイティブ機能 + Coding Agent で仕様 → Issue → 自動実装 → PR |
 | 12:00 - 13:00 | 昼休憩 | |
-| 13:00 - 14:30 | [4. IDE × Copilot 協働開発](docs/04-implementation.md) | レガシーコード理解・リファクタリング・人間とAIの役割分担 |
+| 13:00 - 14:30 | [4. 仕様駆動での機能追加](docs/04-implementation.md) | 経営課題から機能企画・仕様策定・Agent Mode実装・ビジネスIT協働 |
 | 14:30 - 14:45 | 休憩 | |
 | 14:45 - 16:00 | [5. PR を中心とした品質ゲート](docs/05-testing-review.md) | Copilot Code Review・テスト自動生成・セキュリティチェック・マージ |
 | 16:00 - 17:00 | [6. ラップアップ](docs/06-wrapup.md) | 振り返り・導入ロードマップ・質疑応答 |
@@ -62,6 +62,6 @@
 | 1 | [GitHub Flow演習](exercises/exercise-01-github-flow.md) | セッション2 |
 | 2 | [仕様駆動開発演習](exercises/exercise-02-spec-driven.md) | セッション3 |
 | 3 | [Copilot実装演習](exercises/exercise-03-copilot-impl.md) | セッション4 |
-| 4 | [リファクタリング演習](exercises/exercise-04-refactoring.md) | セッション4 |
+| 4 | [仕様駆動での機能追加演習](exercises/exercise-04-feature-addition.md) | セッション4 |
 | 5 | [テスト生成演習](exercises/exercise-05-testing.md) | セッション5 |
 | 6 | [コードレビュー演習](exercises/exercise-06-code-review.md) | セッション5 |
