@@ -37,16 +37,20 @@ GitHub Platform の場合:
 
 ### 2. Copilot Code Review の体験（20分）
 
+> ⚠️ **環境に応じた実施方法**:
+> - **Copilot Code Review が利用可能な場合**: 参加者が自分の PR で体験
+> - **利用できない場合**: 講師デモで確認 → 参加者はローカルで `Copilot Chat` によるセキュリティレビューを実施
+
 #### Step 1: PR を作成する
 
-セッション4のリファクタリング結果を PR にします:
+セッション4の機能追加結果を PR にします:
 
 ```bash
-git push origin feature/team-X-refactoring
+git push origin feature/team-X-[機能名]
 ```
 
 GitHub で Pull Request を作成:
-- **タイトル**: `refactor: 保険料計算の分離とステータス管理の改善`
+- **タイトル**: `feat: [チームの機能名]の実装`
 - **説明**: Copilot Chat に PR の説明文を生成してもらう:
 
 ```
@@ -57,11 +61,26 @@ GitHub で Pull Request を作成:
 
 #### Step 2: Copilot をレビュアーに追加
 
+**パスA: Copilot Code Review が利用可能な場合**
+
 1. PR 画面の **Reviewers** で `Copilot` を追加
 2. Copilot Code Review が自動でコード分析を開始
 3. 数分後、PR のコード差分にレビューコメントが付く
 
-> 📺 **講師デモ**: 事前に用意した PR で Copilot Code Review のコメントを確認
+**パスB: 利用できない場合（講師デモ）**
+
+> 📺 **講師デモ**: 講師の環境で Copilot Code Review の動作を実演します。
+> 参加者は代わりに VS Code の Copilot Chat で以下のローカルレビューを実施:
+
+```
+プロンプト:
+「このブランチで追加・変更したファイルをレビューしてください。
+以下の観点で問題点を指摘してください:
+1. コード品質（可読性、設計パターン）
+2. バグの可能性（null参照、境界値）
+3. セキュリティ（入力バリデーション、インジェクション）
+4. テストの必要性」
+```
 
 #### Copilot Code Review の特徴
 
@@ -90,19 +109,22 @@ git push
 
 #### Step 1: Copilot でテストを生成
 
+セッション4で追加した機能のテストを生成します:
+
 ```
 プロンプト:
-「PremiumCalculatorService（リファクタリング後）のユニットテストを作成してください。
+「セッション4で実装した [チームの機能名] のユニットテストを作成してください。
 
 テストクラスの場所:
-app/src/test/java/com/example/crm/service/PremiumCalculatorServiceTest.java
+app/src/test/java/com/example/crm/service/[機能名]Test.java
 
 以下を含めてください:
-- 各保険タイプの基本計算テスト
-- 年齢による料率変動のテスト
-- 境界値テスト（年齢 25, 30, 40, 60, 65）
-- 入力バリデーションのテスト（不正な保険タイプ、不正な年齢）」
+- 正常系のテスト（主要な機能パスの確認）
+- 異常系のテスト（不正入力、境界値）
+- ビジネスルールの検証テスト」
 ```
+
+> 💡 仕様書の「受け入れ条件」をテストケースに変換するのが効果的です。
 
 #### Step 2: テストを実行
 
@@ -126,7 +148,10 @@ git push
 
 ### 4. セキュリティチェック（10分）
 
-#### GitHub Advanced Security の概要
+#### GitHub Advanced Security の概要（講師デモ）
+
+> 📺 **講師デモ**: GitHub Advanced Security は現在の環境では有効になっていないため、
+> 講師のデモ環境で機能を紹介します。
 
 | 機能 | 説明 | PR での表示 |
 |------|------|------------|
@@ -134,7 +159,11 @@ git push
 | **Secret Scanning** | パスワード、APIキーなどの混入を検出 | プッシュ時にブロック |
 | **Dependabot** | 依存ライブラリの脆弱性を検出 | 自動で PR を作成 |
 
-#### Copilot でセキュリティレビュー
+> 💡 これらの機能を有効にすると、PR の品質ゲートにセキュリティチェックが自動追加されます。
+
+#### Copilot でセキュリティレビュー（参加者実施）
+
+Advanced Security が利用できない環境でも、Copilot Chat でセキュリティ観点のレビューが可能です:
 
 ```
 プロンプト:
@@ -190,6 +219,8 @@ PR の品質ゲート:
 ## 💡 講師向けメモ
 
 - **Copilot Code Review** がこのセッションの最大の見せ場。事前にデモ用 PR を準備
+- **Copilot Code Review が参加者環境で利用不可の場合**: 講師デモ + ローカル Copilot Chat レビューで代替
+- **GHAS が利用不可の場合**: 講師デモで紹介のみ。Copilot Chat でのセキュリティレビューを参加者ハンズオンとする
 - 時間が足りない場合はセキュリティセクションを講師デモに切り替え
 - テスト生成は参加者のスキルレベルに合わせて難易度調整
 - 「PR = 品質ゲート」のメッセージを一貫して伝える

@@ -65,6 +65,10 @@
 ### 2. デモ: Coding Agent の動作確認（10分）
 
 > 📺 **講師デモ**: 事前に準備した Issue → Coding Agent → PR の3段階を見せる
+>
+> ⚠️ **Coding Agent が参加者環境で利用できない場合**:
+> このセクションは講師デモのみとなります。参加者は Step 3 の「完了した PR の確認」で
+> Coding Agent が生成した成果物を確認する形で体験します。
 
 #### 事前準備された3つの状態
 
@@ -193,7 +197,11 @@ git push
 □ 受け入れ条件はテスト可能か
 ```
 
-### 4. ハンズオン: Issue 作成 → Coding Agent にアサイン（15分）
+### 4. ハンズオン: Issue 作成 → 実装（15分）
+
+> ⚠️ **環境に応じた実施方法**:
+> - **パスA（Coding Agent 利用可能）**: Issue に Copilot をアサインし、自動実装を体験
+> - **パスB（Coding Agent 利用不可）**: Issue を作成後、ローカルの Agent Mode で実装
 
 #### Step 1: タスクを GitHub Issue に登録
 
@@ -224,13 +232,31 @@ REST API エンドポイントを実装する。
 - 詳細仕様: specs/renewal-notification/spec.md
 ```
 
-#### Step 2: Coding Agent にアサイン
+#### Step 2: 実装の実行
+
+**パスA: Coding Agent にアサイン（利用可能な場合）**
 
 1. 作成した Issue の **Assignees** に `Copilot` を追加
 2. Coding Agent が Issue を受け取り、自動的に作業を開始
 
 > ⏳ Coding Agent の実行には数分かかります。
 > 待っている間に、**事前準備済みの完了PR** を確認しましょう。
+
+**パスB: ローカル Agent Mode で実装（Coding Agent が利用不可の場合）**
+
+VS Code の Copilot Agent Mode を使って、Issue の内容をベースに実装します:
+
+```
+プロンプト:
+「以下の GitHub Issue の仕様に基づいて実装してください。
+
+[Issue の内容を貼り付け]
+
+まず実装計画を提示してから、承認後に実装してください。」
+```
+
+> 💡 パスBでも Issue を作成するステップは行ってください。
+> 後でコミット・PR 作成時に Issue と紐づけることで、トレーサビリティが確保されます。
 
 #### Step 3: 完了した PR を確認する
 
@@ -317,5 +343,8 @@ Issue → Coding Agent             Issue → Coding Agent
   - 利用不可の場合は Fallback 手順（直接プロンプト入力）を案内
 - Copilot Chat の出力は毎回異なる。参加者ごとに結果が違うことを事前に説明
 - ビジネスメンバーには「仕様を書いたら自動で PR が上がってくる」体験の価値を強調
-- Coding Agent が利用できない環境の場合は、Agent Mode（IDE内）でのデモに切り替え
+- **Coding Agent が利用できない環境の場合**:
+  - デモは講師環境で実施、参加者はローカル Agent Mode で実装を体験
+  - Issue 作成 → Agent Mode 実装 → PR 作成の流れでトレーサビリティは確保
+  - 「Coding Agent が有効であればこの手動ステップが自動化される」ことを説明
 - **Spec Kit デモは講師のみ実行**。参加者には Native フローをハンズオンさせる

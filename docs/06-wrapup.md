@@ -21,9 +21,9 @@
 各チーム、以下の観点で本日の成果を共有してください:
 
 ```
-1. 仕様の作成と、Coding Agent が生成した PR の結果
-2. IDE × Agent Mode でのリファクタリング体験
-3. Copilot Code Review の指摘で発見できたこと
+1. 仕様駆動開発で作成した仕様と、実装結果
+2. チームで企画した機能の動作デモ（セッション4）
+3. ビジネスメンバーとITメンバーの協働で感じたこと
 4. 「GitHub Platform だからこそ」と感じたポイント
 ```
 
@@ -34,11 +34,12 @@
    └ Copilot Chat + Prompt Files で仕様 → 計画 → タスク分解
    └ （Spec Kit をアクセラレータとして活用可能）
 
-② Issue → Coding Agent（セッション3）
-   └ Issue をアサイン → Agent が自律的に実装 → PR 自動作成
+② Issue → 実装（セッション3）
+   └ Coding Agent 利用可能時: Issue をアサイン → Agent が自律的に実装 → PR 自動作成
+   └ Coding Agent 利用不可時: Issue 作成 → Agent Mode で実装 → PR 手動作成
 
-③ IDE × Agent Mode（セッション4）
-   └ レガシーコード理解 → 対話的にリファクタリング
+③ 経営課題 → 機能企画 → 仕様駆動実装（セッション4）
+   └ チーム独自の機能を企画・仕様化・実装 → 動作確認
 
 ④ PR 品質ゲート（セッション5）
    └ Copilot Code Review → テスト → セキュリティ → マージ
@@ -52,7 +53,7 @@
 #### ディスカッションテーマ
 
 **テーマ1: 単体AIツールと比較して、Platform の優位性を最も感じた場面は？**
-- Issue → Coding Agent → PR の自動化
+- Issue → 実装 → PR の自動化（Coding Agent）
 - Copilot Code Review による自動レビュー
 - 仕様 → コード → マージのトレーサビリティ
 - ブランチ保護・承認フローによるガバナンス
