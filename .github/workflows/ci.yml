@@ -1,0 +1,46 @@
+name: CI — ビルド＆テスト
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/**'
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+
+jobs:
+  build-and-test:
+    name: Maven Build & Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: Java 17 セットアップ
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: ビルド＆テスト
+        run: mvn clean verify --batch-mode --no-transfer-progress
+
+      - name: テスト結果サマリー
+        if: always()
+        run: |
+          echo "## テスト結果" >> $GITHUB_STEP_SUMMARY
+          if [ -d target/surefire-reports ]; then
+            TESTS=$(grep -l "testsuite" target/surefire-reports/*.xml 2>/dev/null | wc -l)
+            FAILURES=$(grep -rl 'failures="[^0]"' target/surefire-reports/*.xml 2>/dev/null | wc -l)
+            echo "- テストスイート数: $TESTS" >> $GITHUB_STEP_SUMMARY
+            echo "- 失敗: $FAILURES" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- テストレポートが見つかりません" >> $GITHUB_STEP_SUMMARY
+          fi
