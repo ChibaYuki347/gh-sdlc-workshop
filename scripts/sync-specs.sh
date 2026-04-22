@@ -8,8 +8,8 @@ set -euo pipefail
 
 INPUT=$(cat)
 
-# 変更されたファイルパスを取得
-FILE_PATH=$(echo "$INPUT" | jq -r '.toolInput.filePath // .toolInput.file_path // .toolArgs // empty' 2>/dev/null || echo "")
+# 変更されたファイルパスを取得（jq不要：grep+sedで抽出）
+FILE_PATH=$(echo "$INPUT" | grep -oE '"(filePath|file_path)"\s*:\s*"[^"]*"' | head -1 | sed 's/.*:.*"\(.*\)"/\1/' || echo "")
 
 if [ -z "$FILE_PATH" ]; then
   echo '{}'
