@@ -230,8 +230,8 @@
 **顧客検索**
 
 キーワードによる顧客検索を行います。以下のフィールドに対して部分一致検索を行います。
-- 姓（firstName）
-- 名（lastName）
+- 姓（lastName）
+- 名（firstName）
 - メールアドレス（email）
 - 契約番号（policyNumber）
 
