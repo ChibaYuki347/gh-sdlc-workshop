@@ -1,0 +1,25 @@
+name: "Copilot Setup Steps"
+
+on: workflow_dispatch
+
+jobs:
+  copilot-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: Java 17 セットアップ
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: 依存関係のダウンロード
+        working-directory: app
+        run: mvn dependency:resolve --batch-mode --no-transfer-progress
+
+      - name: ビルド確認
+        working-directory: app
+        run: mvn compile --batch-mode --no-transfer-progress
