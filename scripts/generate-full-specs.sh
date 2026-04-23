@@ -7,17 +7,18 @@ set -euo pipefail
 
 INPUT=$(cat)
 
-# git diff で変更されたファイルを確認
-CHANGED_FILES=$(git diff --name-only HEAD 2>/dev/null || echo "")
+# git status で未追跡ファイルを含む変更ファイルを確認
+GIT_STATUS_OUTPUT=$(git status --porcelain 2>/dev/null || echo "")
+STATUS_FILES=$(printf '%s\n' "$GIT_STATUS_OUTPUT" | sed -E 's/^...//' || echo "")
 
 HAS_CODE_CHANGES=false
 HAS_SPEC_CHANGES=false
 
-if echo "$CHANGED_FILES" | grep -qE 'app/src/main/'; then
+if echo "$STATUS_FILES" | grep -qE '^app/src/main/'; then
   HAS_CODE_CHANGES=true
 fi
 
-if echo "$CHANGED_FILES" | grep -qE 'specs/'; then
+if echo "$STATUS_FILES" | grep -qE '^specs/'; then
   HAS_SPEC_CHANGES=true
 fi
 
