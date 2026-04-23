@@ -31,28 +31,28 @@ function Out-Json($msg) {
 # Controller (REST API) の変更を検知
 if ($FilePath -match 'controller/.*Controller\.java$') {
     if ($FilePath -match 'WebController') {
-        Out-Json "UI Controller が変更されました。specs/ui-spec.md の画面仕様を確認し、変更内容を反映してください。新しいルート、パラメータ変更、画面遷移の追加がある場合は仕様書を更新してください。"
+        Out-Json "⚠️ UI Controller が変更されました。specs/ui-spec.md の画面仕様を確認し、変更内容を反映してください。新しいルート、パラメータ変更、画面遷移の追加がある場合は仕様書を更新してください。"
     } else {
-        Out-Json "REST API Controller が変更されました。specs/api-spec.md のAPI仕様を確認し、変更内容を反映してください。新しいエンドポイント、リクエスト/レスポンス形式の変更がある場合は仕様書を更新してください。"
+        Out-Json "⚠️ REST API Controller が変更されました。specs/api-spec.md のAPI仕様を確認し、変更内容を反映してください。新しいエンドポイント、リクエスト/レスポンス形式の変更がある場合は仕様書を更新してください。"
     }
     exit 0
 }
 
 # Model (エンティティ) の変更を検知
 if ($FilePath -match 'model/.*\.java$') {
-    Out-Json "データモデルが変更されました。specs/api-spec.md のデータモデルセクション、および specs/ui-spec.md の関連する画面表示項目を確認し、仕様書を更新してください。"
+    Out-Json "⚠️ データモデルが変更されました。specs/api-spec.md のデータモデルセクション、および specs/ui-spec.md の関連する画面表示項目を確認し、仕様書を更新してください。"
     exit 0
 }
 
 # Thymeleaf テンプレートの変更を検知
 if ($FilePath -match 'templates/.*\.html$') {
-    Out-Json "UI テンプレートが変更されました。specs/ui-spec.md の該当画面の仕様を確認し、表示項目やユーザー操作の変更を反映してください。"
+    Out-Json "⚠️ UI テンプレートが変更されました。specs/ui-spec.md の該当画面の仕様を確認し、表示項目やユーザー操作の変更を反映してください。"
     exit 0
 }
 
 # Service の変更を検知
 if ($FilePath -match 'service/.*Service\.java$') {
-    Out-Json "ビジネスロジックが変更されました。機能仕様に影響がある場合は、specs/ 配下の関連する仕様書を確認してください。"
+    Out-Json "⚠️ ビジネスロジックが変更されました。機能仕様に影響がある場合は、specs/ 配下の関連する仕様書を確認してください。"
     exit 0
 }
 
