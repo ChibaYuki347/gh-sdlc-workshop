@@ -124,43 +124,57 @@ git push origin feature/team-X-setup-confirmation
 
 ---
 
-## 📝 追加演習: Spec Kit の Git Flow 初期化
+## 📝 追加演習: Spec Kit のファイル構成を理解する
 
-セッション2の「Spec Kit の初期化」パートで時間が足りなかった場合は、こちらの手順で進めてください。
+> 💡 本リポジトリには `specify init .` の出力が事前にコミットされています。
+> この演習では、Spec Kit が生成したファイルの役割を理解します。
 
-### Step 1: ブランチを作成
-
-```bash
-git checkout main
-git pull origin main
-git checkout -b feature/team-X-speckit-init
-```
-
-### Step 2: Spec Kit を初期化
+### Step 1: Spec Kit の構成を確認
 
 ```bash
-specify init .
-```
-
-### Step 3: 初期化結果を確認
-
-```bash
-# 生成されたディレクトリ構成を確認
+# Spec Kit の設定ディレクトリ
 find .specify -type f
+
+# Spec Kit が生成したエージェント定義
+ls .github/agents/
+
+# Spec Kit が生成したプロンプトファイル
+ls .github/prompts/speckit.*.prompt.md
 ```
 
-### Step 4: コミット → Push → PR
+### Step 2: カスタムプロンプトと Spec Kit プロンプトの違いを確認
 
 ```bash
-git add .specify/
-git commit -m "feat: Spec Kit SDD ワークフローを初期化"
-git push origin feature/team-X-speckit-init
+# ワークショップ独自のプロンプト（🏠 マーク）
+cat .github/prompts/specify.prompt.md
+
+# Spec Kit 生成のプロンプト（🤖 マーク）
+cat .github/prompts/speckit.specify.prompt.md
 ```
 
-GitHub で PR を作成 → チームメンバーにレビュー依頼 → Approve → Merge
+> 💡 **ポイント**: 独自プロンプトはプロジェクト固有のルールを、
+> Spec Kit プロンプトは標準的な SDD ワークフローを提供します。
+> 両方を併用することで、より精度の高い仕様駆動開発が可能になります。
+
+### Step 3: （発展）自分のプロジェクトへの導入を試す
+
+自分のプロジェクトで Spec Kit を導入する場合の手順:
+
+```bash
+# 新規プロジェクトで実行
+cd your-project
+specify init .
+# → AI アシスタント選択で "copilot" を選択
+
+# Git Flow で管理
+git checkout -b feature/speckit-init
+git add .specify/ .github/agents/ .github/prompts/speckit.*.prompt.md
+git commit -m "feat: Spec Kit SDD ワークフローを初期化"
+git push origin feature/speckit-init
+```
 
 ### ✅ 追加演習の完了条件
 
-- [ ] `specify init .` が正常に実行できた
-- [ ] `.specify/` ディレクトリが作成されている
-- [ ] PR を作成し、Merge まで完了した
+- [ ] `.specify/` の構成を確認し、各ファイルの役割を理解した
+- [ ] カスタムプロンプトと Spec Kit プロンプトの違いを確認した
+- [ ] Copilot Chat で `/specify` と `/speckit.specify` の両方を試した
