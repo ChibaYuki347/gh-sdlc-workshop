@@ -31,24 +31,25 @@
   # Apache Maven 3.8.x 以上が表示されること
   ```
 
-### Python + uv（Spec Kit 使用時のみ・オプション）
+### Python + uv + Spec Kit（SDD 体験用）
 - **Python 3.11以上** がインストールされていること
   ```bash
-  python3 --version
+  python3 --version   # Linux/macOS
+  python --version     # Windows
   # Python 3.11.x 以上が表示されること
   ```
 - **uv**（Python パッケージマネージャ）がインストールされていること
   ```bash
   uv --version
   ```
-  > Spec Kit を使用する場合に必要です（`uv tool install specify-cli`）。
-  > ネイティブ機能のみで SDD を行う場合は不要です。
 
   **uv のインストール方法（環境に応じて選択）**:
   ```bash
   # 方法1: 公式インストーラ（推奨）
   # Windows (PowerShell)
   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+  # Linux/macOS
+  curl -LsSf https://astral.sh/uv/install.sh | sh
 
   # 方法2: pip 経由（方法1がブロックされる場合）
   pip install uv
@@ -57,7 +58,30 @@
   python -m pip install uv
   ```
 
+- **Spec Kit（specify-cli）** のインストール
+  ```bash
+  uv tool install specify-cli
+  ```
+  インストール後、`specify` コマンドが使えることを確認:
+  ```bash
+  specify --version
+  ```
+
   > ⚠️ 社内ネットワークでインストールがブロックされる場合は、IT部門にご相談ください。
+  > Spec Kit がインストールできない場合でも、ネイティブ機能（Copilot Chat + Prompt Files）で SDD は体験できます。
+
+### Spec Kit の初期化（リポジトリクローン後に実行）
+
+リポジトリをクローンした後、以下を実行して Spec Kit をプロジェクトに初期化します:
+
+```bash
+cd github-sdlc-workshop
+specify init .
+```
+
+> 💡 `specify init .` は現在のディレクトリに `.specify/` フォルダを作成し、
+> SDD ワークフローに必要なテンプレートやコマンドをセットアップします。
+> この操作はセッション2の演習でも改めてガイドします。
 
 ### Git
 - **Git** がインストールされていること
