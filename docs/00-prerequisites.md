@@ -70,18 +70,19 @@
   > ⚠️ 社内ネットワークでインストールがブロックされる場合は、IT部門にご相談ください。
   > Spec Kit がインストールできない場合でも、ネイティブ機能（Copilot Chat + Prompt Files）で SDD は体験できます。
 
-### Spec Kit の初期化（リポジトリクローン後に実行）
+### Spec Kit の初期化について
 
-リポジトリをクローンした後、以下を実行して Spec Kit をプロジェクトに初期化します:
+> ✅ **本ワークショップリポジトリは `specify init .` 済みです。**
+> `.specify/` ディレクトリや `.github/agents/`、`.github/prompts/speckit.*.prompt.md` が
+> すでにコミットされているため、クローン後すぐに SDD ワークフローを利用できます。
+
+自身のプロジェクトで Spec Kit を導入する場合は、以下を実行します:
 
 ```bash
-cd github-sdlc-workshop
+cd your-project
 specify init .
+# → AI アシスタントの選択画面で "copilot" を選択
 ```
-
-> 💡 `specify init .` は現在のディレクトリに `.specify/` フォルダを作成し、
-> SDD ワークフローに必要なテンプレートやコマンドをセットアップします。
-> この操作はセッション2の演習でも改めてガイドします。
 
 ### Git
 - **Git** がインストールされていること
