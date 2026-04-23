@@ -6,12 +6,15 @@ $ErrorActionPreference = "Stop"
 
 $InputJson = [Console]::In.ReadToEnd()
 
-# git diff で変更されたファイルを確認
+# git status で未追跡ファイルを含む変更ファイルを確認
 try {
-    $ChangedFiles = git diff --name-only HEAD 2>$null
+    $GitStatusOutput = git status --porcelain 2>$null
+    if ($LASTEXITCODE -ne 0) { $GitStatusOutput = @() }
 } catch {
-    $ChangedFiles = ""
+    $GitStatusOutput = @()
 }
+
+$ChangedFiles = @($GitStatusOutput | Where-Object { $_ } | ForEach-Object { $_.Substring(3) })
 
 $HasCodeChanges = $false
 $HasSpecChanges = $false
