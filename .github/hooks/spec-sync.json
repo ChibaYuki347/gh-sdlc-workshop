@@ -3,7 +3,7 @@
     "PostToolUse": [
       {
         "type": "command",
-        "command": "./scripts/sync-specs.sh",
+        "command": "scripts/sync-specs.sh",
         "windows": "powershell -ExecutionPolicy Bypass -File scripts\\sync-specs.ps1",
         "timeout": 15
       }
@@ -11,7 +11,7 @@
     "Stop": [
       {
         "type": "command",
-        "command": "./scripts/generate-full-specs.sh",
+        "command": "scripts/generate-full-specs.sh",
         "windows": "powershell -ExecutionPolicy Bypass -File scripts\\generate-full-specs.ps1",
         "timeout": 30
       }

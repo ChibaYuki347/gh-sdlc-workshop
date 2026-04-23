@@ -29,7 +29,7 @@ if ($ChangedFiles -match 'specs/') {
 
 # 実装変更があるが仕様書更新がない場合に警告
 if ($HasCodeChanges -and -not $HasSpecChanges) {
-    $msg = "セッション終了前の確認: 実装コードに変更がありますが、仕様書（specs/）が更新されていません。specs/api-spec.md および specs/ui-spec.md を確認し、変更内容を反映してください。"
+    $msg = "📋 セッション終了前の確認: 実装コードに変更がありますが、仕様書（specs/）が更新されていません。specs/api-spec.md および specs/ui-spec.md を確認し、変更内容を反映してください。"
     $escaped = $msg -replace '\\', '\\\\' -replace '"', '\"'
     Write-Output "{`"systemMessage`": `"$escaped`"}"
     exit 0
