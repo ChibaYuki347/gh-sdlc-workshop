@@ -14,6 +14,8 @@ jobs:
   build-and-test:
     name: Maven Build & Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     defaults:
       run:
         working-directory: app
@@ -36,9 +38,9 @@ jobs:
         if: always()
         run: |
           echo "## テスト結果" >> $GITHUB_STEP_SUMMARY
-          if [ -d target/surefire-reports ]; then
-            TESTS=$({ grep -l "testsuite" target/surefire-reports/*.xml 2>/dev/null || true; } | wc -l)
-            FAILURES=$({ grep -rl 'failures="[^0]"' target/surefire-reports/*.xml 2>/dev/null || true; } | wc -l)
+          if compgen -G "target/surefire-reports/*.xml" > /dev/null 2>&1; then
+            TESTS=$(grep -l "testsuite" target/surefire-reports/*.xml 2>/dev/null | wc -l || echo 0)
+            FAILURES=$(grep -rl 'failures="[^0]"' target/surefire-reports/*.xml 2>/dev/null | wc -l || echo 0)
             echo "- テストスイート数: $TESTS" >> $GITHUB_STEP_SUMMARY
             echo "- 失敗: $FAILURES" >> $GITHUB_STEP_SUMMARY
           else
