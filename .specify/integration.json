@@ -2,6 +2,7 @@
   "integration": "copilot",
   "version": "0.7.2.dev0",
   "scripts": {
-    "update-context": ".specify/integrations/copilot/scripts/update-context.sh"
+    "update-context": ".specify/integrations/copilot/scripts/update-context.sh",
+    "update-context-windows": ".specify/integrations/copilot/scripts/update-context.ps1"
   }
 }
