@@ -121,3 +121,46 @@ git push origin feature/team-X-setup-confirmation
 - [ ] ブランチが作成され、変更がプッシュされている
 - [ ] Pull Request が作成されている
 - [ ] 他チームからのレビューコメントがある（任意）
+
+---
+
+## 📝 追加演習: Spec Kit の Git Flow 初期化
+
+セッション2の「Spec Kit の初期化」パートで時間が足りなかった場合は、こちらの手順で進めてください。
+
+### Step 1: ブランチを作成
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/team-X-speckit-init
+```
+
+### Step 2: Spec Kit を初期化
+
+```bash
+specify init .
+```
+
+### Step 3: 初期化結果を確認
+
+```bash
+# 生成されたディレクトリ構成を確認
+find .specify -type f
+```
+
+### Step 4: コミット → Push → PR
+
+```bash
+git add .specify/
+git commit -m "feat: Spec Kit SDD ワークフローを初期化"
+git push origin feature/team-X-speckit-init
+```
+
+GitHub で PR を作成 → チームメンバーにレビュー依頼 → Approve → Merge
+
+### ✅ 追加演習の完了条件
+
+- [ ] `specify init .` が正常に実行できた
+- [ ] `.specify/` ディレクトリが作成されている
+- [ ] PR を作成し、Merge まで完了した
