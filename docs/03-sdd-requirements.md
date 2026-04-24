@@ -201,11 +201,14 @@ git push
 
 > ⚠️ **環境に応じた実施方法**:
 > - **パスA（Coding Agent 利用可能）**: Issue に Copilot をアサインし、自動実装を体験
-> - **パスB（Coding Agent 利用不可）**: Issue を作成後、ローカルの Agent Mode で実装
+> - **パスB（Coding Agent 利用不可 / GitHub 操作不可）**: ローカルの Agent Mode で実装
 
-#### Step 1: タスクを GitHub Issue に登録
+#### Step 1: タスクを仕様として整理する
 
-`specs/renewal-notification/tasks.md` から **1つ** を選んで Issue を作成:
+`specs/renewal-notification/tasks.md` から **1つ** を選び、以下の形式で整理します:
+
+> 📋 **GitHub にアクセスできる場合**: 以下の内容で GitHub Issue を作成してください。
+> **アクセスできない場合**: ローカルに `specs/renewal-notification/issue-draft.md` として保存してください。
 
 ```markdown
 タイトル: feat: 契約更新通知APIの実装
@@ -244,19 +247,19 @@ REST API エンドポイントを実装する。
 
 **パスB: ローカル Agent Mode で実装（Coding Agent が利用不可の場合）**
 
-VS Code の Copilot Agent Mode を使って、Issue の内容をベースに実装します:
+VS Code の Copilot Agent Mode を使って、仕様をベースに実装します:
 
 ```
 プロンプト:
-「以下の GitHub Issue の仕様に基づいて実装してください。
+「以下の仕様に基づいて実装してください。
 
-[Issue の内容を貼り付け]
+[Issue / issue-draft.md の内容を貼り付け]
 
 まず実装計画を提示してから、承認後に実装してください。」
 ```
 
-> 💡 パスBでも Issue を作成するステップは行ってください。
-> 後でコミット・PR 作成時に Issue と紐づけることで、トレーサビリティが確保されます。
+> 💡 パスBでも仕様を Issue 形式で整理するステップは重要です。
+> 「何を作るか」を明確に定義してから AI に渡すことで、精度の高い実装が得られます。
 
 #### Step 3: 完了した PR を確認する
 

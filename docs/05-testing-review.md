@@ -41,13 +41,16 @@ GitHub Platform の場合:
 > - **Copilot Code Review が利用可能な場合**: 参加者が自分の PR で体験
 > - **利用できない場合**: 講師デモで確認 → 参加者はローカルで `Copilot Chat` によるセキュリティレビューを実施
 
-#### Step 1: PR を作成する
+#### Step 1: PR を作成する（または ローカルレビューの準備）
 
 セッション4の機能追加結果を PR にします:
 
 ```bash
 git push origin feature/team-X-[機能名]
 ```
+
+> 📋 **push できない場合**: ローカルでコミットまで完了していれば OK です。
+> 以下の Step 2 パスB（ローカルレビュー）に進んでください。
 
 GitHub で Pull Request を作成:
 - **タイトル**: `feat: [チームの機能名]の実装`
@@ -140,11 +143,14 @@ mvn test
 ```bash
 git add .
 git commit -m "test: PremiumCalculatorService のユニットテストを追加"
-git push
+git push  # push できない場合はローカルコミットまででOK
 ```
 
 > GitHub Actions が設定されている場合、PR 上で CI の結果が表示されます。
 > テストがパスすると PR に ✅ チェックマークが付きます。
+>
+> 📋 **push できない場合**: `mvn test` の結果がローカルで成功していれば、
+> CI の役割は果たされています。講師デモで GitHub Actions の動作を確認します。
 
 ### 4. セキュリティチェック（10分）
 

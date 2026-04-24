@@ -16,6 +16,9 @@
 
 ### Step 1: Issue を作成する（5分）
 
+> 📋 **GitHub にアクセスできない場合**: 以下の内容をローカルに
+> `docs/issues/team-X-setup.md` として保存してください。
+
 1. GitHub のリポジトリページで **Issues** タブを開く
 2. **New issue** をクリック
 3. 以下の内容で Issue を作成:
@@ -89,9 +92,15 @@ git commit -m "docs: チームXのセットアップ確認結果を追加 #1"
 git push origin feature/team-X-setup-confirmation
 ```
 
+> 📋 **push できない場合**: コミットまで完了していれば OK です。
+> ローカルで `git log --oneline` を実行して、コミットが記録されていることを確認しましょう。
+
 > 💡 コミットメッセージに `#1` を含めると、Issue #1 に自動リンクされます
 
 ### Step 3: Pull Request を作成する（5分）
+
+> 📋 **GitHub にアクセスできない場合**: このステップは講師デモで確認してください。
+> ローカルで変更をコミットできていれば、GitHub Flow の核心（ブランチ → コミット → レビュー）は体験済みです。
 
 1. GitHub でリポジトリを開く
 2. 「Compare & pull request」ボタンをクリック（またはPull requestsタブから新規作成）
