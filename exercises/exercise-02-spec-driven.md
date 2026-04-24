@@ -114,18 +114,21 @@ specs/renewal-notification/plan.md を読んでタスク一覧に分解してく
 ```bash
 git add specs/renewal-notification/
 git commit -m "docs: 契約更新通知機能の仕様・計画・タスクを追加"
-git push
+git push  # push できない場合はコミットまででOK
 ```
 
 ### Phase 2: Issue 作成 → 実装（15分）
 
 > ⚠️ **環境に応じた実施方法**:
 > - **パスA（Coding Agent 利用可能）**: Issue に Copilot をアサインし、自動実装を体験
-> - **パスB（Coding Agent 利用不可）**: Issue を作成後、ローカルの Agent Mode で実装
+> - **パスB（Coding Agent 利用不可 / GitHub 操作不可）**: ローカルの Agent Mode で実装
 
-#### Step 1: タスクを Issue に登録
+#### Step 1: タスクを整理する
 
-`specs/renewal-notification/tasks.md` から **1つ** のタスクを選び、GitHub Issue を作成:
+`specs/renewal-notification/tasks.md` から **1つ** のタスクを選び、以下の形式で整理します:
+
+> 📋 **GitHub にアクセスできる場合**: 以下の内容で GitHub Issue を作成してください。
+> **アクセスできない場合**: ローカルに `specs/renewal-notification/issue-draft.md` として保存してください。
 
 ```markdown
 タイトル: feat: 契約更新通知APIの実装
@@ -163,17 +166,18 @@ REST API エンドポイントを実装する。
 
 **パスB: ローカル Agent Mode で実装（Coding Agent が利用不可の場合）**
 
-Issue の内容をコピーし、VS Code の Copilot Agent Mode で実装します:
+仕様の内容を使って、VS Code の Copilot Agent Mode で実装します:
 
 ```
 プロンプト:
-「以下の GitHub Issue の仕様に基づいて実装してください。
+「以下の仕様に基づいて実装してください。
 まず計画を提示し、承認後に実装を開始してください。
 
-[Issue の内容を貼り付け]」
+[Issue / issue-draft.md の内容を貼り付け]」
 ```
 
-> 💡 パスBでも Issue 作成は行います。後の PR で `Closes #XX` と紐づけてトレーサビリティを確保します。
+> 💡 パスBでも仕様を Issue 形式で整理するステップは重要です。
+> 「何を作るか」を明確に定義してから AI に渡すことで、精度の高い実装が得られます。
 
 ### Phase 3: 完了 PR の確認（15分）
 

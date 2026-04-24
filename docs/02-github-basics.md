@@ -82,6 +82,9 @@ GitHub Flow はこの後体験する全ての自動化の基盤です:
 
 #### Issue の作成
 
+> 📋 **GitHub にアクセスできない場合**: Issue の内容をローカルの `docs/issues/` フォルダに
+> Markdown ファイルとして保存してください。フローの理解が目的です。
+
 1. GitHub リポジトリページを開く
 2. **Issues** タブ → **New issue** をクリック
 3. 以下の内容で Issue を作成:
@@ -105,11 +108,16 @@ GitHub Flow はこの後体験する全ての自動化の基盤です:
 # featureブランチを作成
 git checkout -b feature/team-X-setup
 
-# 変更をコミット・プッシュ
+# 変更をコミット
 git add .
 git commit -m "チームX: 環境確認完了"
+
+# プッシュ（リポジトリアカウントで認証）
 git push origin feature/team-X-setup
 ```
+
+> 📋 **push できない場合**: ローカルブランチの作成とコミットまでを実施してください。
+> ブランチ運用の概念は同じです。PR 作成は講師デモで確認します。
 
 GitHub で Pull Request を作成し、他チームのメンバーを Reviewer に追加してください。
 
@@ -244,3 +252,4 @@ VS Code で Copilot Chat を開き、以下を試してください:
 - Prompt File が Copilot Chat で認識されない場合は、VS Code の再起動を試す
 - 「この GitHub Flow が自動化の基盤」というメッセージを繰り返す
 - 時間が押している場合は PR 作成まで進めなくてもOK（Issue + Branch まで）
+- **デュアルアカウント環境**: 詳細は [講師ガイド: デュアルアカウント環境の運用](instructor-guide-dual-account.md) を参照
