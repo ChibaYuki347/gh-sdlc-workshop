@@ -9,7 +9,7 @@
 
 - GitHub ネイティブ機能（Copilot Chat + Prompt Files）で SDD を体験する
 - 仕様 → 計画 → タスク分解 → Issue 作成の流れを実践する
-- Copilot Coding Agent にアサインし、自動実装の体験をする
+- Copilot Cloud Agent にアサインし、自動実装の体験をする
 
 ---
 
@@ -120,8 +120,8 @@ git push  # push できない場合はコミットまででOK
 ### Phase 2: Issue 作成 → 実装（15分）
 
 > ⚠️ **環境に応じた実施方法**:
-> - **パスA（Coding Agent 利用可能）**: Issue に Copilot をアサインし、自動実装を体験
-> - **パスB（Coding Agent 利用不可 / GitHub 操作不可）**: ローカルの Agent Mode で実装
+> - **パスA（Cloud Agent 利用可能）**: Issue に Copilot をアサインし、自動実装を体験
+> - **パスB（Cloud Agent 利用不可 / GitHub 操作不可）**: ローカルの Agent Mode で実装
 
 #### Step 1: タスクを整理する
 
@@ -157,14 +157,14 @@ REST API エンドポイントを実装する。
 
 #### Step 2: 実装
 
-**パスA: Coding Agent にアサイン（利用可能な場合）**
+**パスA: Cloud Agent にアサイン（利用可能な場合）**
 
 1. Issue の **Assignees** に `Copilot` を追加
-2. Coding Agent が自動で実行を開始
+2. Cloud Agent が自動で実行を開始
 
 > ⏳ Agent の実行中は次の Phase に進みましょう
 
-**パスB: ローカル Agent Mode で実装（Coding Agent が利用不可の場合）**
+**パスB: ローカル Agent Mode で実装（Cloud Agent が利用不可の場合）**
 
 仕様の内容を使って、VS Code の Copilot Agent Mode で実装します:
 
@@ -183,7 +183,7 @@ REST API エンドポイントを実装する。
 
 #### 事前準備済みの PR を確認
 
-講師が事前に用意した Coding Agent の完了 PR を確認します:
+講師が事前に用意した Cloud Agent の完了 PR を確認します:
 
 ```
 確認チェックリスト:
@@ -195,7 +195,7 @@ REST API エンドポイントを実装する。
 
 #### 自チームの成果物を確認
 
-**パスA**: 自チームがアサインした Issue の Coding Agent PR が完成していれば:
+**パスA**: 自チームがアサインした Issue の Cloud Agent PR が完成していれば:
 
 1. PR の内容を確認
 2. 仕様との整合性をチームで検証
@@ -215,7 +215,7 @@ REST API エンドポイントを実装する。
 - [ ] `specs/renewal-notification/plan.md`（技術計画）が作成されている
 - [ ] `specs/renewal-notification/tasks.md`（タスク一覧）が作成されている
 - [ ] GitHub Issue が作成されている
-- [ ] Coding Agent PR または ローカル実装の PR を確認済み
+- [ ] Cloud Agent PR または ローカル実装の PR を確認済み
 
 ---
 

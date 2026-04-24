@@ -77,7 +77,7 @@ GitHub Flow はこの後体験する全ての自動化の基盤です:
     ↓
   Merge（本番統合）
 
-→ Coding Agent もこの同じフローに従って自律的に動作します
+→ Cloud Agent もこの同じフローに従って自律的に動作します
 ```
 
 #### Issue の作成
@@ -122,7 +122,7 @@ git push origin feature/team-X-setup
 GitHub で Pull Request を作成し、他チームのメンバーを Reviewer に追加してください。
 
 > 💡 この「Issue → Branch → PR → Review → Merge」がプラットフォーム開発の基本パターンです。
-> セッション3では、このフローを **Coding Agent が自動で実行** します。
+> セッション3では、このフローを **Cloud Agent が自動で実行** します。
 
 ### 3. Spec Kit の構成を確認する（10分）
 

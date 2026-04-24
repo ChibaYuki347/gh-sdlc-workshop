@@ -7,7 +7,7 @@
 ## 🎯 セッションのゴール
 
 - GitHub Platform が「単体AIツール」と根本的に異なる理由を理解する
-- Issue → Coding Agent → PR → Copilot Review → Merge の統合開発ループを把握する
+- Issue → Cloud Agent → PR → Copilot Review → Merge の統合開発ループを把握する
 - 本日のハンズオンで体験するライフサイクル全体像を知る
 
 ---
@@ -25,7 +25,7 @@
   └ チーム開発・ガバナンス・トレーサビリティは別途構築が必要
 
 【GitHub Platform のアプローチ】
-  仕様 → Issue → Coding Agent が自動実装 → PR → Copilot Review → CI/CD → Merge
+  仕様 → Issue → Cloud Agent が自動実装 → PR → Copilot Review → CI/CD → Merge
   └ AIが「プラットフォーム上で」自律的に開発サイクルを回す
   └ 要件からデプロイまで、全てが追跡可能・監査可能
 ```
@@ -42,7 +42,7 @@
 │       ↓        （Spec Kit 等のアクセラレータも利用可能）   │
 │  ② Issues      タスクを Issue として登録              │
 │       ↓                                              │
-│  ③ Coding Agent Issue をアサイン → 自動で実装・PR作成 │
+│  ③ Cloud Agent Issue をアサイン → 自動で実装・PR作成 │
 │       ↓                                              │
 │  ④ Copilot Code Review  PR上で自動コードレビュー     │
 │       ↓                                              │
@@ -60,7 +60,7 @@
 
 | 観点 | 単体AIツール | GitHub Platform |
 |------|-------------|-----------------|
-| **コード生成** | ✅ 開発者のIDEで生成 | ✅ IDE + Coding Agent が自律的に生成 |
+| **コード生成** | ✅ 開発者のIDEで生成 | ✅ IDE + Cloud Agent が自律的に生成 |
 | **タスク管理** | ❌ 別ツールが必要 | ✅ Issues/Projects で統合管理 |
 | **コードレビュー** | ❌ 手動 or 別ツール | ✅ Copilot Code Review がPR上で自動実行 |
 | **CI/CD** | ❌ 別途構築 | ✅ GitHub Actions で統合 |
@@ -83,7 +83,7 @@ GitHub Copilot ファミリー:
     └ 複数ファイルの横断的変更、ターミナル操作
     └ 開発者が対話しながら協働
 
-  Copilot Coding Agent (クラウドエージェント) ★本日の主役
+  Copilot Cloud Agent（クラウドエージェント） ★本日の主役
     └ GitHub Issue をアサインすると自律的に実装
     └ ブランチ作成 → コード実装 → PR作成 まで全自動
     └ 人間はレビューと承認に集中
@@ -98,11 +98,11 @@ GitHub Copilot ファミリー:
 
 **本日体験するループ**:
 1. 仕様を書く（Copilot Chat + Prompt Files / Spec Kit）→ Issue 登録
-2. Coding Agent が自動で実装 → PR が上がってくる
+2. Cloud Agent が自動で実装 → PR が上がってくる
 3. IDE で Copilot と協働してリファクタリング
 4. Copilot Code Review + テスト + セキュリティチェック → Merge
 
-> 📺 **デモ**: 講師が Issue → Coding Agent → PR 作成の流れを実演
+> 📺 **デモ**: 講師が Issue → Cloud Agent → PR 作成の流れを実演
 
 **チーム編成**:
 - 4〜5名1チーム（ビジネス + IT 混成）
@@ -113,7 +113,7 @@ GitHub Copilot ファミリー:
 
 ## 💡 講師向けメモ
 
-- 冒頭のデモが最重要。事前に Coding Agent で PR を1つ作成しておき、ライブで見せる
+- 冒頭のデモが最重要。事前に Cloud Agent で PR を1つ作成しておき、ライブで見せる
 - 「単体AIツールとの違い」は参加者の最大の関心事。比較表を画面に出しておく
 - ビジネスロールには「仕様がIssueになり、自動で実装される」体験の価値を強調
 - 「ガバナンス・監査」はマネージャー層への訴求ポイント

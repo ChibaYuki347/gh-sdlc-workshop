@@ -6,7 +6,7 @@
 
 ### ハンズオンシナリオ
 
-**既存改修シナリオ（メイン）**：擬似保険CRMアプリケーション（Java/Spring Boot）を題材に、GitHub Platform の統合開発ループ（仕様策定 → Issue → Coding Agent → PR → Copilot Review → Merge）を体験します。
+**既存改修シナリオ（メイン）**：擬似保険CRMアプリケーション（Java/Spring Boot）を題材に、GitHub Platform の統合開発ループ（仕様策定 → Issue → Cloud Agent → PR → Copilot Review → Merge）を体験します。
 
 ## 🕐 タイムテーブル
 
@@ -15,7 +15,7 @@
 | 09:00 - 09:45 | [1. キックオフ](docs/01-kickoff.md) | GitHub Platform が実現する AI 開発ライフサイクル |
 | 09:45 - 10:30 | [2. 環境セットアップ](docs/02-github-basics.md) | GitHub Flow の基礎と Spec Kit 初期化 |
 | 10:30 - 10:45 | 休憩 | |
-| 10:45 - 12:00 | [3. 仕様駆動開発（SDD）](docs/03-sdd-requirements.md) | ネイティブ機能 + Coding Agent で仕様 → Issue → 自動実装 → PR |
+| 10:45 - 12:00 | [3. 仕様駆動開発（SDD）](docs/03-sdd-requirements.md) | ネイティブ機能 + Cloud Agent で仕様 → Issue → 自動実装 → PR |
 | 12:00 - 13:00 | 昼休憩 | |
 | 13:00 - 14:30 | [4. 仕様駆動での機能追加](docs/04-implementation.md) | 経営課題から機能企画・仕様策定・Agent Mode実装・ビジネスIT協働 |
 | 14:30 - 14:45 | 休憩 | |

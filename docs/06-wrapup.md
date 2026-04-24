@@ -35,8 +35,8 @@
    └ （Spec Kit をアクセラレータとして活用可能）
 
 ② Issue → 実装（セッション3）
-   └ Coding Agent 利用可能時: Issue をアサイン → Agent が自律的に実装 → PR 自動作成
-   └ Coding Agent 利用不可時: Issue 作成 → Agent Mode で実装 → PR 手動作成
+   └ Cloud Agent 利用可能時: Issue をアサイン → Agent が自律的に実装 → PR 自動作成
+   └ Cloud Agent 利用不可時: Issue 作成 → Agent Mode で実装 → PR 手動作成
 
 ③ 経営課題 → 機能企画 → 仕様駆動実装（セッション4）
    └ チーム独自の機能を企画・仕様化・実装 → 動作確認
@@ -53,7 +53,7 @@
 #### ディスカッションテーマ
 
 **テーマ1: 単体AIツールと比較して、Platform の優位性を最も感じた場面は？**
-- Issue → 実装 → PR の自動化（Coding Agent）
+- Issue → 実装 → PR の自動化（Cloud Agent）
 - Copilot Code Review による自動レビュー
 - 仕様 → コード → マージのトレーサビリティ
 - ブランチ保護・承認フローによるガバナンス
