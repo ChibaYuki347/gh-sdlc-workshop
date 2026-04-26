@@ -1,0 +1,76 @@
+name: バグ改修
+description: バグの報告
+title: "[バグ] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        バグの報告をお寄せいただきありがとうございます。
+        以下の項目をできるだけ詳しくご記入ください。
+  - type: textarea
+    id: summary
+    attributes:
+      label: バグの概要
+      description: 発生しているバグの概要を記載してください。
+      placeholder: 例）保険契約の更新時に premiumAmount が 0 にリセットされる
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 再現手順
+      description: バグを再現するための手順を記載してください。
+      placeholder: |
+        1. POST /api/policies で新規契約を作成する
+        2. PUT /api/policies/{id} で policyStatus のみを更新する
+        3. GET /api/policies/{id} で結果を確認する
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 期待する動作
+      description: 本来どのように動作すべきかを記載してください。
+      placeholder: 例）policyStatus のみが更新され、premiumAmount は変更前の値が保持される
+    validations:
+      required: true
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: 実際の動作
+      description: 現在どのように動作しているかを記載してください。
+      placeholder: 例）premiumAmount が 0.00 にリセットされてしまう
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 重要度
+      description: バグの重要度を選択してください。
+      options:
+        - 低（軽微な問題）
+        - 中（通常の問題）
+        - 高（重大な問題）
+        - 緊急（サービス停止レベル）
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境情報
+      description: バグが発生した環境の情報を記載してください。
+      placeholder: |
+        - OS: macOS 14.0
+        - Java: 17.0.9
+        - Spring Boot: 3.2.x
+        - ブラウザ: Chrome 120
+    validations:
+      required: false
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 補足情報
+      description: ログ、スクリーンショット、関連する Issue など、補足情報があれば記載してください。
+    validations:
+      required: false
