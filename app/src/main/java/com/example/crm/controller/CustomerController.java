@@ -1,6 +1,7 @@
 package com.example.crm.controller;
 
 import com.example.crm.model.Customer;
+import com.example.crm.dto.RenewalNotificationResponse;
 import com.example.crm.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -82,5 +83,27 @@ public class CustomerController {
     @GetMapping("/report/monthly")
     public Map<String, Object> getMonthlyReport() {
         return customerService.generateMonthlyReport();
+    }
+
+    // 契約更新通知API
+    @GetMapping("/renewals")
+    public ResponseEntity<?> getRenewalNotifications(
+            @RequestParam(defaultValue = "30") int daysUntilRenewal,
+            @RequestParam(required = false) String agentName) {
+
+        if (daysUntilRenewal < 1) {
+            return ResponseEntity.badRequest().body(Map.of("error", "daysUntilRenewal must be a positive integer"));
+        }
+        if (daysUntilRenewal > 365) {
+            return ResponseEntity.badRequest().body(Map.of("error", "daysUntilRenewal must not exceed 365"));
+        }
+
+        // 空文字はフィルタなしとして扱う
+        if (agentName != null && agentName.trim().isEmpty()) {
+            agentName = null;
+        }
+
+        RenewalNotificationResponse response = customerService.getRenewalNotifications(daysUntilRenewal, agentName);
+        return ResponseEntity.ok(response);
     }
 }

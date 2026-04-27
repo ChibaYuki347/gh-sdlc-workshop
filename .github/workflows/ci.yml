@@ -6,9 +6,10 @@ on:
     paths:
       - 'app/**'
   push:
-    branches: [main]
+    branches: [main, 'feature/**']
     paths:
       - 'app/**'
+      - '.github/workflows/ci.yml'
 
 jobs:
   build-and-test:
@@ -34,15 +35,34 @@ jobs:
       - name: ビルド＆テスト
         run: mvn clean verify --batch-mode --no-transfer-progress
 
+      - name: テストレポートをアップロード
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: app/target/surefire-reports/
+          retention-days: 14
+
       - name: テスト結果サマリー
         if: always()
         run: |
           echo "## テスト結果" >> $GITHUB_STEP_SUMMARY
           if compgen -G "target/surefire-reports/*.xml" > /dev/null 2>&1; then
-            TESTS=$(grep -l "testsuite" target/surefire-reports/*.xml 2>/dev/null | wc -l || echo 0)
-            FAILURES=$(grep -rl 'failures="[^0]"' target/surefire-reports/*.xml 2>/dev/null | wc -l || echo 0)
-            echo "- テストスイート数: $TESTS" >> $GITHUB_STEP_SUMMARY
-            echo "- 失敗: $FAILURES" >> $GITHUB_STEP_SUMMARY
+            TOTAL=$(grep -h 'tests=' target/surefire-reports/TEST-*.xml 2>/dev/null | grep -oP 'tests="\K[0-9]+' | awk '{s+=$1} END {print s+0}')
+            FAILURES=$(grep -h 'failures=' target/surefire-reports/TEST-*.xml 2>/dev/null | grep -oP 'failures="\K[0-9]+' | awk '{s+=$1} END {print s+0}')
+            ERRORS=$(grep -h 'errors=' target/surefire-reports/TEST-*.xml 2>/dev/null | grep -oP 'errors="\K[0-9]+' | awk '{s+=$1} END {print s+0}')
+            echo "| 項目 | 件数 |" >> $GITHUB_STEP_SUMMARY
+            echo "|------|------|" >> $GITHUB_STEP_SUMMARY
+            echo "| テスト合計 | $TOTAL |" >> $GITHUB_STEP_SUMMARY
+            echo "| 失敗 | $FAILURES |" >> $GITHUB_STEP_SUMMARY
+            echo "| エラー | $ERRORS |" >> $GITHUB_STEP_SUMMARY
+            if [ "$FAILURES" -gt 0 ] || [ "$ERRORS" -gt 0 ]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "### 失敗したテスト" >> $GITHUB_STEP_SUMMARY
+              grep -rl 'failures="[^0]"\|errors="[^0]"' target/surefire-reports/TEST-*.xml 2>/dev/null | while read f; do
+                echo "- $(basename "$f" .xml)" >> $GITHUB_STEP_SUMMARY
+              done
+            fi
           else
-            echo "- テストレポートが見つかりません" >> $GITHUB_STEP_SUMMARY
+            echo "テストレポートが見つかりません" >> $GITHUB_STEP_SUMMARY
           fi

@@ -1,6 +1,7 @@
 package com.example.crm.controller;
 
 import com.example.crm.model.Customer;
+import com.example.crm.dto.RenewalNotificationResponse;
 import com.example.crm.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,11 @@ public class WebController {
         model.addAttribute("report", report);
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("recentCustomers", customers.size() > 5 ? customers.subList(0, 5) : customers);
+
+        // 更新通知ウィジェット（30日以内）
+        RenewalNotificationResponse renewals = customerService.getRenewalNotifications(30, null);
+        model.addAttribute("renewals", renewals);
+
         return "dashboard";
     }
 
@@ -126,5 +132,22 @@ public class WebController {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         return "report";
+    }
+
+    // 契約更新通知一覧
+    @GetMapping("/renewals")
+    public String renewals(
+            @RequestParam(defaultValue = "30") int daysUntilRenewal,
+            @RequestParam(required = false) String agentName,
+            Model model) {
+        if (daysUntilRenewal < 1) daysUntilRenewal = 30;
+        if (daysUntilRenewal > 365) daysUntilRenewal = 365;
+        if (agentName != null && agentName.trim().isEmpty()) agentName = null;
+
+        RenewalNotificationResponse response = customerService.getRenewalNotifications(daysUntilRenewal, agentName);
+        model.addAttribute("response", response);
+        model.addAttribute("daysUntilRenewal", daysUntilRenewal);
+        model.addAttribute("agentName", agentName);
+        return "renewals";
     }
 }

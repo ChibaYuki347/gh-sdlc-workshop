@@ -2,11 +2,16 @@ package com.example.crm.service;
 
 import com.example.crm.model.Customer;
 import com.example.crm.model.Policy;
+import com.example.crm.dto.RenewalCustomerDto;
+import com.example.crm.dto.RenewalNotificationResponse;
 import com.example.crm.repository.CustomerRepository;
 import com.example.crm.repository.PolicyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -180,5 +185,47 @@ public class CustomerService {
         // TODO: 実際のメール送信処理を実装
         System.out.println("メール送信: " + customer.email + " - " + message);
         return true;
+    }
+
+    // 契約更新通知対象の取得
+    public RenewalNotificationResponse getRenewalNotifications(int days, String agentName) {
+        LocalDate deadlineLocal = LocalDate.now().plusDays(days);
+        Date deadline = Date.from(deadlineLocal.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        List<Customer> customers;
+        if (agentName != null && !agentName.isEmpty()) {
+            customers = customerRepository.findRenewalTargetsByAgent(1, deadline, "%" + agentName + "%");
+        } else {
+            customers = customerRepository.findRenewalTargets(1, deadline);
+        }
+
+        List<RenewalCustomerDto> renewals = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+
+        for (Customer c : customers) {
+            RenewalCustomerDto dto = new RenewalCustomerDto();
+            dto.customerId = c.id;
+            dto.firstName = c.firstName;
+            dto.lastName = c.lastName;
+            dto.fullName = c.getFullName();
+            dto.email = c.email;
+            dto.phone = c.phone;
+            dto.policyNumber = c.policyNumber;
+            dto.policyType = c.policyType;
+            dto.policyStatus = c.policyStatus;
+            dto.policyStatusText = c.getPolicyStatusText();
+            dto.premiumAmount = c.premiumAmount;
+            dto.policyStartDate = c.policyStartDate;
+            dto.policyEndDate = c.policyEndDate;
+            dto.agentName = c.agentName;
+            dto.agentEmail = c.agentEmail;
+
+            LocalDate endLocal = c.policyEndDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            dto.daysUntilRenewal = ChronoUnit.DAYS.between(today, endLocal);
+
+            renewals.add(dto);
+        }
+
+        return new RenewalNotificationResponse(renewals, days, agentName);
     }
 }
