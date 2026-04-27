@@ -44,6 +44,20 @@
         </div>
     </div>
 
+    <!-- 更新通知サマリー -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-warning">
+                <div class="panel-body stat-box">
+                    <a th:href="@{/renewals}" style="text-decoration:none; color:inherit;">
+                        <div class="stat-number" th:text="${upcomingRenewalsCount}">0</div>
+                        <div class="stat-label">更新間近の契約（30日以内）— クリックして詳細を確認</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- クイックリンク -->
     <div class="row">
         <div class="col-md-6">

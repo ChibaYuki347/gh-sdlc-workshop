@@ -171,6 +171,28 @@ public class CustomerService {
         return report;
     }
 
+    // 更新間近の契約件数取得（デフォルト: 30日以内）
+    public long countUpcomingRenewals(int daysBeforeExpiry) {
+        return getUpcomingRenewals(daysBeforeExpiry).size();
+    }
+
+    // 更新間近の顧客一覧取得（デフォルト: 30日以内）
+    public List<Customer> getUpcomingRenewals(int daysBeforeExpiry) {
+        List<Customer> all = customerRepository.findAll();
+        Date now = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, daysBeforeExpiry);
+        Date threshold = cal.getTime();
+        List<Customer> results = new ArrayList<>();
+        for (Customer c : all) {
+            if (c.policyStatus == 1 && c.policyEndDate != null
+                    && !c.policyEndDate.before(now) && !c.policyEndDate.after(threshold)) {
+                results.add(c);
+            }
+        }
+        return results;
+    }
+
     // メール送信（ダミー、本来は別サービス）
     public boolean sendNotification(Long customerId, String message) {
         Customer customer = customerRepository.findById(customerId).get();

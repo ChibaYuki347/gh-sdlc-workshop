@@ -28,6 +28,7 @@ public class WebController {
         model.addAttribute("report", report);
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("recentCustomers", customers.size() > 5 ? customers.subList(0, 5) : customers);
+        model.addAttribute("upcomingRenewalsCount", customerService.countUpcomingRenewals(30));
         return "dashboard";
     }
 
@@ -126,5 +127,13 @@ public class WebController {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         return "report";
+    }
+
+    // 更新通知一覧
+    @GetMapping("/renewals")
+    public String renewals(Model model) {
+        List<Customer> renewals = customerService.getUpcomingRenewals(30);
+        model.addAttribute("renewals", renewals);
+        return "renewals";
     }
 }
